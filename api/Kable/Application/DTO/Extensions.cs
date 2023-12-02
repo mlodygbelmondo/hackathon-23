@@ -13,7 +13,32 @@ public static class Extensions
             Charge = result.Charge,
             EnvironmentalConditions = result.EnvironmentalConditions,
             InstallationMethod = result.InstallationMethod,
-            Link = result.Link
         };
     }
+
+    public static Result AsResult(this ResultDto resultDto)
+    {
+        return new Result
+        {
+            CableStrands = resultDto.CableStrands,
+            CableType = resultDto.CableType,
+            Charge = resultDto.Charge,
+            EnvironmentalConditions = resultDto.EnvironmentalConditions,
+            InstallationMethod = resultDto.InstallationMethod,
+        };
+    }
+    
+    public static GetResultDto AsResultdwa(this Result getResultDto)
+    {
+        return new GetResultDto()
+        {
+            CableStrands = getResultDto.CableStrands,
+            CableType = getResultDto.CableType,
+            Charge = getResultDto.Charge,
+            EnvironmentalConditions = getResultDto.EnvironmentalConditions,
+            InstallationMethod = getResultDto.InstallationMethod,
+            Link = getResultDto.Link
+        };
+    }
+    
 }

@@ -14,6 +14,15 @@ public class TestController(IResultService resultService) : ControllerBase
     {
         return resultService.GetResult();
     }
+    
+    [HttpGet("{id}")]
+    public async Task<ActionResult<GetResultDto>> Get(int id)
+    {
+        var result = await resultService.GetResultByIdAsync(id);
+        if (result is null)
+            return NotFound();
+        return result;
+    }
 
     [HttpPost]
     public async Task<CreatedAtActionResult> Post(ResultDto resultDto)

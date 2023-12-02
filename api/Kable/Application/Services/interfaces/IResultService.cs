@@ -5,7 +5,7 @@ namespace Application.Services.interfaces;
 
 public interface IResultService
 {
-    Task<ResultDto> GetResultByIdAsync(int id);
+    Task<GetResultDto> GetResultByIdAsync(int id);
     Task<Result> AddResultAsync(ResultDto resultDto);
     string GetResult();
 }
