@@ -7,8 +7,9 @@ namespace Infrastucture.DAL;
 
 public static class Extensions
 {
-    public static void AddDal(this IServiceCollection services)
+    public static IServiceCollection AddDal(this IServiceCollection services)
     {
         services.AddScoped<IResultRepository, ResultRepository>();
+        return services;
     }
 }

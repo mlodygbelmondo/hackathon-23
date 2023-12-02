@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "CHnTs+s7XWApEuS/3gT9NfbATksk+6UacoKF//CLggliBCR3Lr3Pfq5ftXF+D983cCU53Q8q48C5aVyNZVREvA==",
+  "dgSpecHash": "YZfTeozWHOgvpuW74hTUcXntEBhJPIN/OPOI0hLcCqOpKdtnxslyT9uC0xlWJwLp8pDygdyKy3S53UeUIkSnVw==",
   "success": true,
   "projectFilePath": "C:\\hackathon\\hackathon-23\\api\\Kable\\Application\\Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\piotr\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

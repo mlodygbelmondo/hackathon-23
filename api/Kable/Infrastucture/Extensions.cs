@@ -9,12 +9,14 @@ namespace Infrastucture;
 
 public static class Extensions
 {
-    public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDal();
         services.AddDbContext<DataContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });
+        return services;
     }
+    
 }

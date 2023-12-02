@@ -5,4 +5,5 @@ namespace Domain.Repositories;
 public interface IResultRepository
 {
     Task<Result> GetResultByIdAsync(int id);
+    string GetResult();
 }
