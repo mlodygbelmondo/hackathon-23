@@ -13,7 +13,26 @@ const AmbientTemperature = ({
   previousStep,
   valueInput,
 }: IAmbientTemperatureProps) => {
+  const temperatures = [
+    "10",
+    "15",
+    "20",
+    "25",
+    "30",
+    "35",
+    "40",
+    "45",
+    "50",
+    "55",
+    "60",
+    "65",
+    "70",
+    "75",
+    "80",
+  ];
+
   const [value, setValue] = React.useState(valueInput);
+
   return (
     <div className="flex flex-col">
       <label
@@ -33,51 +52,15 @@ const AmbientTemperature = ({
         <option value="" selected={valueInput === ""}>
           Temperatura otoczenia...
         </option>
-        <option selected={valueInput === "10"} value="10">
-          10
-        </option>
-        <option selected={valueInput === "15"} value="15">
-          15
-        </option>
-        <option selected={valueInput === "20"} value="20">
-          20
-        </option>
-        <option selected={valueInput === "25"} value="25">
-          25
-        </option>
-        <option selected={valueInput === "30"} value="30">
-          30
-        </option>
-        <option selected={valueInput === "35"} value="35">
-          35
-        </option>
-        <option selected={valueInput === "40"} value="40">
-          40
-        </option>
-        <option selected={valueInput === "45"} value="45">
-          45
-        </option>
-        <option selected={valueInput === "50"} value="50">
-          50
-        </option>
-        <option selected={valueInput === "55"} value="55">
-          55
-        </option>
-        <option selected={valueInput === "60"} value="60">
-          60
-        </option>
-        <option selected={valueInput === "65"} value="65">
-          65
-        </option>
-        <option selected={valueInput === "70"} value="70">
-          70
-        </option>
-        <option selected={valueInput === "75"} value="75">
-          75
-        </option>
-        <option selected={valueInput === "80"} value="80">
-          80
-        </option>
+        {temperatures.map((temperature) => (
+          <option
+            key={temperature}
+            value={temperature}
+            selected={valueInput === temperature}
+          >
+            {temperature}
+          </option>
+        ))}
       </select>
       <div className="w-100 flex">
         <button

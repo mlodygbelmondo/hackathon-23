@@ -14,6 +14,37 @@ const InstalationMethod = ({
   valueInput,
 }: IInstalationMethodProps) => {
   const [value, setValue] = React.useState(valueInput);
+
+  const methods = [
+    { value: "a1", label: "A1 - bezposrednio w scianie izolowanej cieplnie" },
+    {
+      value: "a2",
+      label: "A2 - w rurze instalacyjnej w ścianie izolowanej cieplnie",
+    },
+    {
+      value: "b1",
+      label:
+        "B1 - w rurze instalacyjnej na ścianie/murze - dla kabli jednożyłowych",
+    },
+    {
+      value: "b2",
+      label:
+        "B2 - w rurze instalacyjnej na ścianie/murze - dla kabli i przewodów wielożyłowych",
+    },
+    {
+      value: "e",
+      label:
+        "E - w powietrzu (np. perforowane korytko) - dla kabli i przewodów wielożyłowych",
+    },
+    {
+      value: "f",
+      label:
+        "F - w powietrzu (np. perforowane korytko) - dla kabli jednożyłowych",
+    },
+    { value: "d1", label: "D1 - w rurze osłonowej w ziemi" },
+    { value: "d2", label: "D2 - bezpośrednio w ziemi" },
+  ];
+
   return (
     <div className="flex flex-col">
       <label
@@ -33,34 +64,16 @@ const InstalationMethod = ({
         <option value="" selected={valueInput === ""}>
           Sposób instalacji...
         </option>
-        <option value="a1" selected={valueInput === "a1"}>
-          A1 - bezposrednio w scianie izolowanej cieplnie
-        </option>
-        <option value="a2" selected={valueInput === "a2"}>
-          A2 - w rurze instalacyjnej w ścianie izolowanej cieplnie
-        </option>
-        <option value="b1" selected={valueInput === "b1"}>
-          B1 - w rurze instalacyjnej na ścianie/murze - dla kabli jednożyłowych
-        </option>
-        <option value="b2" selected={valueInput === "b2"}>
-          B2 - w rurze instalacyjnej na ścianie/murze - dla kabli i przewodów
-          wielożyłowych
-        </option>
-        <option value="e" selected={valueInput === "e"}>
-          E - w powietrzu (np. perforowane korytko) - dla kabli i przewodów
-          wielożyłowych
-        </option>
-        <option value="f" selected={valueInput === "f"}>
-          F - w powietrzu (np. perforowane korytko) - dla kabli jednożyłowych
-        </option>
-        <option selected={valueInput === "d1"} value="d1">
-          D1 - w rurze osłonowej w ziemi
-        </option>
-        <option selected={valueInput === "d2"} value="d2">
-          D2 - bezpośrednio w ziemi
-        </option>
+        {methods.map((method) => (
+          <option
+            key={method.value}
+            value={method.value}
+            selected={valueInput === method.value}
+          >
+            {method.label}
+          </option>
+        ))}
       </select>
-
       <div className="w-100 flex">
         <button
           type="button"
