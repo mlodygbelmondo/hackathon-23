@@ -6,6 +6,8 @@
     "liczbaZyli": 1,
     "liczbaZyliObciazonychPradowo": 3,
     "numbers": [
+      { "loadCurrent": 17, "crossSectionOfVein": "1,5" },
+      { "loadCurrent": 23, "crossSectionOfVein": "2,5" },
       { "loadCurrent": 31, "crossSectionOfVein": "4" },
       { "loadCurrent": 40, "crossSectionOfVein": "6" },
       { "loadCurrent": 54, "crossSectionOfVein": "10" },
@@ -19,19 +21,18 @@
       { "loadCurrent": 285, "crossSectionOfVein": "150" },
       { "loadCurrent": 324, "crossSectionOfVein": "185" },
       { "loadCurrent": 380, "crossSectionOfVein": "240" },
-      { "loadCurrent": 435, "crossSectionOfVein": "300" },
-      { "loadCurrent": null, "crossSectionOfVein": "przewód/kabel" },
-      { "loadCurrent": 17, "crossSectionOfVein": "1,5" },
-      { "loadCurrent": 23, "crossSectionOfVein": "2,5" }
+      { "loadCurrent": 435, "crossSectionOfVein": "300" }
     ]
   },
   {
     "installationType": "B1",
     "numberOfPhases": 3,
     "veinCrossing": "obciążalność prądowa",
-    "liczbaZyli": 1,
+    "liczbaZyli": "31-gru",
     "liczbaZyliObciazonychPradowo": 3,
     "numbers": [
+      { "loadCurrent": 20, "crossSectionOfVein": "1,5" },
+      { "loadCurrent": 28, "crossSectionOfVein": "2,5" },
       { "loadCurrent": 37, "crossSectionOfVein": "4" },
       { "loadCurrent": 48, "crossSectionOfVein": "6" },
       { "loadCurrent": 66, "crossSectionOfVein": "10" },
@@ -45,10 +46,7 @@
       { "loadCurrent": 342, "crossSectionOfVein": "150" },
       { "loadCurrent": 384, "crossSectionOfVein": "185" },
       { "loadCurrent": 450, "crossSectionOfVein": "240" },
-      { "loadCurrent": 514, "crossSectionOfVein": "300" },
-      { "loadCurrent": null, "crossSectionOfVein": "przewód/kabel" },
-      { "loadCurrent": 20, "crossSectionOfVein": "1,5" },
-      { "loadCurrent": 28, "crossSectionOfVein": "2,5" }
+      { "loadCurrent": 514, "crossSectionOfVein": "300" }
     ]
   },
   {
@@ -58,6 +56,8 @@
     "liczbaZyli": 1,
     "liczbaZyliObciazonychPradowo": 3,
     "numbers": [
+      { "loadCurrent": 26, "crossSectionOfVein": "1,5" },
+      { "loadCurrent": 34, "crossSectionOfVein": "2,5" },
       { "loadCurrent": 44, "crossSectionOfVein": "4" },
       { "loadCurrent": 56, "crossSectionOfVein": "6" },
       { "loadCurrent": 77, "crossSectionOfVein": "10" },
@@ -71,10 +71,7 @@
       { "loadCurrent": 437, "crossSectionOfVein": "150" },
       { "loadCurrent": 507, "crossSectionOfVein": "185" },
       { "loadCurrent": 604, "crossSectionOfVein": "240" },
-      { "loadCurrent": 697, "crossSectionOfVein": "300" },
-      { "loadCurrent": null, "crossSectionOfVein": "przewód/kabel" },
-      { "loadCurrent": 26, "crossSectionOfVein": "1,5" },
-      { "loadCurrent": 34, "crossSectionOfVein": "2,5" }
+      { "loadCurrent": 697, "crossSectionOfVein": "300" }
     ]
   }
 ]
