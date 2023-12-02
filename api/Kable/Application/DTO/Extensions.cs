@@ -1,4 +1,5 @@
 using Application.DTO.Account;
+using Application.DTO.Request;
 using Domain.Entitiy;
 
 namespace Application.DTO;
@@ -78,6 +79,37 @@ public static class Extensions
         };
     }
     
+    #endregion
+
+    #region Request
+    public static GetRequestDto AsRequestDto(this Domain.Entitiy.Request request)
+    {
+        var XD =  new GetRequestDto
+        {
+            Id = request.Id,
+            Latitude = request.Latitude,
+            Longitude = request.Longitude,
+            CreatedAt = request.CreatedAt,
+            UserId = (int)request.UserId,
+            ResultId = request.ResultId
+        };
+        XD.GetAccountDto = request.User.AsDto();
+        XD.GetResultDto = request.Result.AsResultdwa();
+        return XD;
+    }
+    
+    public static Domain.Entitiy.Request AsRequest(this CreateRequestDto createRequestDto)
+    {
+        return new Domain.Entitiy.Request
+        {
+            Latitude = createRequestDto.Latitude,
+            Longitude = createRequestDto.Longitude,
+            CreatedAt = DateTime.Now,
+            RequestState = 0
+        };
+    }
+    
+
     #endregion
     
 }

@@ -18,6 +18,7 @@ public static class Extensions
         services.AddScoped<IUserContextService, UserContextService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+        services.AddScoped<IRequestService, RequestService>();
         return services;
     }   
 }

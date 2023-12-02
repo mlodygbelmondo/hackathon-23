@@ -11,6 +11,7 @@ public static class Extensions
     {
         services.AddScoped<IResultRepository, ResultRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRequestRepository, RequestRepository>();
         return services;
     }
 }
