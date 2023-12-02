@@ -36,7 +36,7 @@ const Map = ({ reports }: { reports: any }) => {
   // };
 
   return (
-    <div className="h-[100%] w-5/12">
+    <div className="h-[100%] w-full">
       <GoogleMap
         apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}
         defaultZoom={MAP_ZOOM.DEFAULT}
@@ -44,7 +44,7 @@ const Map = ({ reports }: { reports: any }) => {
         options={mapOptions}
         defaultCenter={DEFAULT_MAP_CENTER}
         onGoogleApiLoaded={onGoogleApiLoaded}
-      ></GoogleMap>
+      />
     </div>
   );
 };
