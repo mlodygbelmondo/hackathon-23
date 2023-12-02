@@ -1,3 +1,4 @@
+using Application.DTO.Account;
 using Domain.Entitiy;
 
 namespace Application.DTO;
@@ -37,8 +38,46 @@ public static class Extensions
             Charge = getResultDto.Charge,
             EnvironmentalConditions = getResultDto.EnvironmentalConditions,
             InstallationMethod = getResultDto.InstallationMethod,
-            Link = getResultDto.Link
+            Link = getResultDto.Link,
+            LinkPhoto = getResultDto.LinkPhoto
         };
     }
+
+    #region UserExtensions
+    public static GetAccountDto AsDto(this User user)
+    {
+        return new GetAccountDto
+        {
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            Role = user.Role
+        };
+    }
+    
+    public static User AsUser(this GetAccountDto userDto)
+    {
+        return new User
+        {
+            FirstName = userDto.FirstName,
+            LastName = userDto.LastName,
+            Email = userDto.Email,
+            Role = userDto.Role
+        };
+    }
+    
+    public static User AsUser(this RegisterUserDto registerUserDto)
+    {
+        return new User
+        {
+            FirstName = registerUserDto.FirstName,
+            LastName = registerUserDto.LastName,
+            Email = registerUserDto.Email,
+            Password = registerUserDto.Password,
+            Role = registerUserDto.Role
+        };
+    }
+    
+    #endregion
     
 }

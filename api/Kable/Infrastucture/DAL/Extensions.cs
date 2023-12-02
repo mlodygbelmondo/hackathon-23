@@ -10,6 +10,7 @@ public static class Extensions
     public static IServiceCollection AddDal(this IServiceCollection services)
     {
         services.AddScoped<IResultRepository, ResultRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
         return services;
     }
 }

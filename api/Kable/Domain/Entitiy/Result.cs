@@ -12,6 +12,7 @@ public class Result
     public InstallationMethod InstallationMethod { get; set; }
     public EnvironmentalConditions EnvironmentalConditions { get; set; }
     public string Link { get; set; }
+    public string LinkPhoto { get; set; }
     public virtual Request Request { get; set; }
 }
         
