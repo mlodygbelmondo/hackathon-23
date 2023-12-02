@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "~/components/input";
 import Select, { type Option } from "~/components/select";
 import type {
   CableEnvironment,
@@ -16,6 +17,10 @@ export interface InitialDataProps {
   installationMethod: string;
   ambientTemperature: string;
   thermalResistivityOfTheSoil: string;
+  power?: string;
+  load?: string;
+  powerFactor?: string;
+  amountOfCables: string;
 }
 
 const temperatures = [
@@ -44,6 +49,10 @@ const initialData = {
   installationMethod: "",
   ambientTemperature: "",
   thermalResistivityOfTheSoil: "",
+  power: 0,
+  load: 0,
+  powerFactor: 0,
+  amountOfCables: "0",
 };
 
 const metalTypes = [
@@ -246,7 +255,6 @@ const FormPage = () => {
       );
     }
 
-    console.log(formData.numberOfLoadedVeins);
     if (formData.numberOfLoadedVeins) {
       availableCables = availableCables.filter(
         (cable) =>
@@ -337,6 +345,28 @@ const FormPage = () => {
       value: type,
     })) as Option[];
   };
+
+  const resistivityOptions: Option[] = [
+    { label: "0.5", value: "0.5" },
+    { label: "0.7", value: "0.7" },
+    { label: "1", value: "1" },
+    { label: "1.5", value: "1.5" },
+    { label: "2", value: "2" },
+    { label: "2.5", value: "2.5" },
+    { label: "3", value: "3" },
+  ];
+
+  const amountOfCables: Option[] = [
+    { label: "1", value: "1" },
+    { label: "2", value: "2" },
+    { label: "3", value: "3" },
+    { label: "4", value: "4" },
+    { label: "5", value: "5" },
+    { label: "6", value: "6" },
+    { label: "7", value: "7" },
+    { label: "8", value: "8" },
+    { label: "9", value: "9" },
+  ];
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center">
@@ -433,6 +463,70 @@ const FormPage = () => {
           options={getAvailableInstallationTypes()}
           selectedValue={formData.installationMethod}
         />
+        <p className="pt-4">
+          UWAGA: Jezeli wpisałeś obciążenie to moc i współzynnik mocy zostają
+          zignorowane przy obliczeniach
+        </p>
+        <Input
+          placeholderValue="Wpisz moc"
+          onChange={(val) =>
+            setFormData({
+              ...formData,
+              power: val,
+            })
+          }
+          label="Wpisz moc"
+        />
+        <Input
+          placeholderValue="Wpisz obciazenie"
+          onChange={(val) =>
+            setFormData({
+              ...formData,
+              load: val,
+            })
+          }
+          label="Wpisz obciazenie"
+        />
+        <Input
+          placeholderValue="Wpisz wspolczynnik mocy"
+          onChange={(val) =>
+            setFormData({
+              ...formData,
+              powerFactor: val,
+            })
+          }
+          label="Wpisz wspolczynnik mocy"
+        />
+        <Select
+          label="Wybierz rezystywność cieplną gruntu "
+          defaultOptionLabel="Wybierz rezystywność cieplną gruntu "
+          onChange={(val) =>
+            setFormData({
+              ...formData,
+              thermalResistivityOfTheSoil: val,
+            })
+          }
+          options={resistivityOptions}
+          selectedValue={formData.thermalResistivityOfTheSoil}
+        />
+        <Select
+          label="Wybierz ilość przewodów "
+          defaultOptionLabel="Wybierz ilość przewodów... "
+          onChange={(val) =>
+            setFormData({
+              ...formData,
+              amountOfCables: val,
+            })
+          }
+          options={amountOfCables}
+          selectedValue={formData.amountOfCables}
+        />
+        <button
+          className="mt-4 w-1/3 rounded-xl  bg-blue-500 px-6 py-2  hover:bg-blue-700"
+          type="submit"
+        >
+          Wyslij
+        </button>
       </form>
       {getFilteredCables().join(", ")}
     </div>
