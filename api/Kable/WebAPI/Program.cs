@@ -8,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
+builder.Services.AddCors(opt=>opt.AddPolicy("CorsPolicy",policy=>{
+    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+}));
+
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 var app = builder.Build();
