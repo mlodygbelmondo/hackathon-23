@@ -24,7 +24,7 @@ const Header = () => {
         </div>
 
         <div className="ms-auto flex w-full items-center justify-end sm:order-3 sm:justify-between sm:gap-x-3">
-          <div className="text-2xl font-bold">{title}</div>
+          <div className="text-2xl font-bold"></div>
           <div className="sm:hidden">
             <button
               type="button"
@@ -39,7 +39,7 @@ const Header = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               >
                 <circle cx="11" cy="11" r="8" />
@@ -62,7 +62,7 @@ const Header = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               >
                 <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
@@ -82,7 +82,7 @@ const Header = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               >
                 <circle cx="12" cy="12" r="4" />
@@ -110,7 +110,7 @@ const Header = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               >
                 <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
@@ -131,7 +131,7 @@ const Header = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               >
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
@@ -170,7 +170,7 @@ const Header = () => {
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      stroke-linecap="round"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                     >
                       <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
@@ -191,7 +191,7 @@ const Header = () => {
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      stroke-linecap="round"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                     >
                       <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
@@ -213,7 +213,7 @@ const Header = () => {
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      stroke-linecap="round"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                     >
                       <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
@@ -235,7 +235,7 @@ const Header = () => {
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      stroke-linecap="round"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                     >
                       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />

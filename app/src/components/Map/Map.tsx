@@ -8,7 +8,7 @@ import { DEFAULT_MAP_CENTER, MAP_ZOOM } from "~/utils/consts";
 import Marker from "./Marker";
 import { env } from "~/env";
 
-const Map = ({ reports }: { reports: any }) => {
+const Map = ({ requests }: { requests: any }) => {
   const mapRef = useRef<google.maps.Map>();
   const [, setMapReady] = useState(false);
 
