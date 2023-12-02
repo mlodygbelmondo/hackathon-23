@@ -33,6 +33,92 @@ const FormPage = () => {
     console.log(formData);
   };
 
+  const CurrentFormStep = ({ step }: { step: number }) => {
+    switch (step) {
+      case 1:
+        return (
+          <TypeOfMetalDetails
+            handleInput={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              setFormData((prevDetails) => ({
+                ...prevDetails,
+                typeOfMetal: e.target.value,
+              }));
+            }}
+            valueInput={formData.typeOfMetal}
+            nextStep={() => setStep((prev) => prev + 1)}
+          />
+        );
+      case 2:
+        return (
+          <TypeOfInsulatingMaterial
+            handleInput={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              setFormData((prevDetails) => ({
+                ...prevDetails,
+                typeOfInsulatingMaterial: e.target.value,
+              }));
+            }}
+            valueInput={formData.typeOfInsulatingMaterial}
+            nextStep={() => setStep((prev) => prev + 1)}
+            previousStep={() => setStep((prev) => prev - 1)}
+          />
+        );
+      case 3:
+        return (
+          <NumberOfLoadedVeins
+            handleInput={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              setFormData((prevDetails) => ({
+                ...prevDetails,
+                numberOfLoadedVeins: e.target.value,
+              }));
+            }}
+            valueInput={formData.numberOfLoadedVeins}
+            nextStep={() => setStep((prev) => prev + 1)}
+            previousStep={() => setStep((prev) => prev - 1)}
+          />
+        );
+      case 4:
+        return (
+          <InstalationMethod
+            handleInput={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              setFormData((prevDetails) => ({
+                ...prevDetails,
+                instalationMethod: e.target.value,
+              }));
+            }}
+            valueInput={formData.instalationMethod}
+            nextStep={() => setStep((prev) => prev + 1)}
+            previousStep={() => setStep((prev) => prev - 1)}
+          />
+        );
+      case 5:
+        return (
+          <AmbientTemperature
+            handleInput={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              setFormData((prevDetails) => ({
+                ...prevDetails,
+                ambientTemperature: e.target.value,
+              }));
+            }}
+            valueInput={formData.ambientTemperature}
+            nextStep={() => setStep((prev) => prev + 1)}
+            previousStep={() => setStep((prev) => prev - 1)}
+          />
+        );
+      case 6:
+        return (
+          <ThermalResistivityOfTheSoil
+            handleInput={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              setFormData((prevDetails) => ({
+                ...prevDetails,
+                thermalResistivityOfTheSoil: e.target.value,
+              }));
+            }}
+            previousStep={() => setStep((prev) => prev - 1)}
+          />
+        );
+    }
+  };
+
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center">
       <h1 className="pb-4 text-3xl">Formularz zgłoszeniowy</h1>
