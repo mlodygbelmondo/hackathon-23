@@ -12,7 +12,7 @@ public class ResultConfiguration : IEntityTypeConfiguration<Result>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
         builder.Property(x => x.CableType).IsRequired();
-        builder.Property(x => x.VeinsNumbers).IsRequired();
+        builder.Property(x => x.CableStrands).IsRequired();
         builder.Property(x => x.Charge).IsRequired();
         builder.Property(x => x.InstallationMethod).IsRequired();
         builder.Property(x => x.EnvironmentalConditions).IsRequired();
