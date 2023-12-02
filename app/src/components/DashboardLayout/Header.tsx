@@ -1,4 +1,12 @@
+import { useRouter } from "next/router";
+
 const Header = () => {
+  const { pathname } = useRouter();
+
+  const path = pathname.split("/").pop()?.replace("-", " ") ?? "";
+
+  const title = path.charAt(0).toUpperCase() + path.slice(1);
+
   return (
     <header className="fixed inset-x-0 top-0 z-[48] flex w-full flex-wrap border-b bg-white py-2.5 text-sm dark:border-gray-700 dark:bg-gray-800 sm:flex-nowrap sm:justify-start sm:py-4 lg:ps-64">
       <nav
@@ -7,7 +15,7 @@ const Header = () => {
       >
         <div className="me-5 lg:me-0 lg:hidden">
           <a
-            className="flex-none text-xl font-semibold dark:text-white"
+            className="flex-none text-xl font-bold dark:text-white"
             href="#"
             aria-label="Brand"
           >
@@ -16,7 +24,7 @@ const Header = () => {
         </div>
 
         <div className="ms-auto flex w-full items-center justify-end sm:order-3 sm:justify-between sm:gap-x-3">
-          <div></div>
+          <div className="text-2xl font-bold">{title}</div>
           <div className="sm:hidden">
             <button
               type="button"

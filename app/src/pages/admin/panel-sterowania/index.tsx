@@ -5,9 +5,11 @@ import Map from "~/components/Map/Map";
 
 const Page: NextPageWithLayout = () => {
   return (
-    <div className="h-[100%] w-full">
-      halo
-      <Map reports={[]} />
+    <div className="flex h-full w-full flex-col gap-2">
+      <p className="text-2xl font-bold">Raporty na mapie</p>
+      <div className="h-[calc(100%-70px)] w-7/12 overflow-hidden rounded-2xl border border-gray-300 shadow-sm">
+        <Map reports={[]} />
+      </div>
     </div>
   );
 };
