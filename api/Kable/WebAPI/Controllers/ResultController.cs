@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
 [ApiController]
-[Route("[controller]")]
-public class TestController(IResultService resultService) : ControllerBase
+[Route("api/[controller]")]
+public class ResultController(IResultService resultService) : ControllerBase
 {
     
     [HttpGet("test")]
@@ -29,5 +29,12 @@ public class TestController(IResultService resultService) : ControllerBase
     {
         var result = await resultService.AddResultAsync(resultDto);
         return CreatedAtAction(nameof(Get), new { id = result.Id }, result.AsDto());
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<GetResultDto>>> GetResults()
+    {
+        var results = await resultService.GetResultsAsync();
+        return Ok(results);
     }
 }

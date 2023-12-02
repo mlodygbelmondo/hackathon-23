@@ -9,6 +9,12 @@ namespace Application.Services;
 public class ResultService(IResultRepository resultRepository)
     : IResultService
 {
+    public async Task<ICollection<GetResultDto>> GetResultsAsync()
+    {
+       var results = await resultRepository.GetResultsAsync();
+       return results.Select(x => x.AsResultdwa()).ToList();
+    }
+
     public async Task<GetResultDto> GetResultByIdAsync(int id)
     {
         var result = await resultRepository.GetResultByIdAsync(id);

@@ -6,6 +6,9 @@ namespace Infrastucture.DAL.Repositories;
 
 public class ResultRepository(DataContext context) : IResultRepository
 {
+    public async Task<ICollection<Result>> GetResultsAsync()=>
+        await context.Results.ToListAsync();
+
     public async Task<Result> GetResultByIdAsync(int id)
     => await context.Results.FirstOrDefaultAsync(x => x.Id == id);
     public async Task<Result> AddResultAsync(Result result)
