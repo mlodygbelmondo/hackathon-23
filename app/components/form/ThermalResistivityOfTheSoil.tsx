@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface IThermalResistivityOfTheSoilProps {
   handleInput: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -9,7 +9,9 @@ const ThermalResistivityOfTheSoil = ({
   handleInput,
   previousStep,
 }: IThermalResistivityOfTheSoilProps) => {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = useState("");
+  const resistivityOptions = ["", "0.5", "0.7", "1", "1.5", "2", "2.5", "3"];
+
   return (
     <div className="flex flex-col">
       <label
@@ -25,28 +27,21 @@ const ThermalResistivityOfTheSoil = ({
         }}
         id="thermal-resistivity-of-the-soil"
         className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+        value={value}
       >
-        <option value="" selected>
-          Rezystywność cieplna gruntu...
-        </option>
-        <option value="0.5">0.5</option>
-        <option value="0.7">0.7</option>
-        <option value="1">1</option>
-        <option value="1.5">1.5</option>
-        <option value="2">2</option>
-        <option value="2.5">2.5</option>
-        <option value="3">3</option>
+        {resistivityOptions.map((optionValue) => (
+          <option key={optionValue} value={optionValue}>
+            {optionValue === ""
+              ? "Rezystywność cieplna gruntu..."
+              : optionValue}
+          </option>
+        ))}
       </select>
 
       <div className="w-100 flex">
         <button
           type="button"
-          style={{
-            marginRight: "auto",
-            width: "25%",
-            marginTop: ".7rem",
-          }}
-          className="rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          className="mr-auto mt-4 w-1/4 rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           onClick={previousStep}
         >
           Cofnij
@@ -54,12 +49,7 @@ const ThermalResistivityOfTheSoil = ({
         <button
           disabled={value === ""}
           type="submit"
-          style={{
-            marginLeft: "auto",
-            width: "25%",
-            marginTop: ".7rem",
-          }}
-          className="rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          className="ml-auto mt-4 w-1/4 rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
         >
           Wyślij
         </button>

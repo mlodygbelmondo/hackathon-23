@@ -6,7 +6,7 @@ interface ITypeOfMetalDetailsProps {
   valueInput: string;
 }
 
-const TypeOfMetalDetails = ({
+const AmountOfCables = ({
   nextStep,
   handleInput,
   valueInput,
@@ -50,4 +50,4 @@ const TypeOfMetalDetails = ({
   );
 };
 
-export default TypeOfMetalDetails;
+export default AmountOfCables;

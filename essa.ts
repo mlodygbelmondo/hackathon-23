@@ -40,7 +40,7 @@ const XD = [
     "240": 450,
     "300": 514,
     obwód: "3 fazowy",
-    "liczba żył w kablu": "31-gru",
+    "liczba żył w kablu": 1,
     "liczba żył obciążonych prądowo": 3,
     "metoda referencyjna": "B1",
     "przekrój żyły": "obciążalność prądowa",
@@ -73,12 +73,11 @@ const XD = [
 ];
 
 const res = XD.map((item) => {
-  const installationMethod = item["metoda referencyjna"] ?? null;
-  const veinCrossing = item["przekrój żyły"] ?? null;
-  const liczbaZyli = item["liczba żył"] ?? item["liczba żył w kablu"] ?? null;
-  const liczbaZyliObciazonychPradowo =
-    item["liczba żył obciążonych prądowo"] ?? null;
-  const circuit = item.obwód ?? null;
+  const installationMethod = item["metoda referencyjna"];
+  const veinCrossing = item["przekrój żyły"];
+  const liczbaZyli = item["liczba żył w kablu"];
+  const liczbaZyliObciazonychPradowo = item["liczba żył obciążonych prądowo"];
+  const circuit = item.obwód;
 
   const numbers = Object.keys(item)
     .filter(
@@ -86,15 +85,16 @@ const res = XD.map((item) => {
         key !== "metoda referencyjna" &&
         key !== "przekrój żyły" &&
         key !== "obwód" &&
-        key !== "liczba żył" &&
         key !== "liczba żył w kablu" &&
         key !== "liczba żył obciążonych prądowo",
     )
     .map((key) => ({
       loadCurrent:
-        (typeof item[key] === "number"
+        typeof item[key] === "number"
           ? item[key]
-          : parseFloat(item[key].replace(",", "."))) ?? null,
+          : item[key] === ""
+          ? null
+          : parseFloat(item[key].replace(",", ".")),
       crossSectionOfVein: key,
     }))
     .sort((a, b) => a.loadCurrent - b.loadCurrent);
@@ -108,6 +108,5 @@ const res = XD.map((item) => {
     numbers,
   };
 });
-const title = "N2XH-jednozylowy";
 
-writeFileSync(`kable/${title}.json`, JSON.stringify(res));
+writeFileSync("./data.json", JSON.stringify(res));
