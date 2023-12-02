@@ -34,7 +34,8 @@ const FormPage = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="flex h-screen w-screen flex-col items-center justify-center">
+      <h1 className="pb-4 text-3xl">Formularz zgłoszeniowy</h1>
       <form onSubmit={handleSubmit} className="w-1/2">
         {step === 1 && (
           <TypeOfMetalDetails

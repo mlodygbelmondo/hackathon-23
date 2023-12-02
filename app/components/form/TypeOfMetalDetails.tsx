@@ -15,7 +15,7 @@ const TypeOfMetalDetails = ({
   return (
     <div className="flex flex-col">
       <label
-        htmlFor="countries"
+        htmlFor="type-of-metal"
         className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
       >
         Wybierz zyle
@@ -25,7 +25,7 @@ const TypeOfMetalDetails = ({
           handleInput(e);
           setValue(e.target.value);
         }}
-        id="countries"
+        id="type-of-metal"
         className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
       >
         <option value="" selected={valueInput === ""}>
