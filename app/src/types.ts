@@ -13,8 +13,6 @@ export type InstallationType =
 
 export type Environment = "air" | "ground";
 
-export type MetalType = "copper" | "aluminium";
-
 export const cables: CableType[] = [
   "YDY",
   "YDYp",
@@ -25,6 +23,7 @@ export const cables: CableType[] = [
 ];
 
 export type NumberOfPhases = 1 | 3;
+export type CableMaterial = "copper" | "aluminium";
 
 export type ConductorLoad = "one" | "two" | "multi";
 
@@ -36,5 +35,5 @@ export interface CableEnvironment {
   availableNumberOfLoadedVeins: ConductorLoad[];
   isolationMaterial: IsolationType;
   maxTemperature: number;
-  material?: "copper" | "aluminium";
+  material?: CableMaterial;
 }

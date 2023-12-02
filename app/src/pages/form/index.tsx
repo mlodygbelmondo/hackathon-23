@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { getCable } from "~/algorytm";
 import Input from "~/components/input";
 import Select, { type Option } from "~/components/select";
 import type {
   CableEnvironment,
+  CableMaterial,
   CableType,
   ConductorLoad,
   Environment,
   InstallationType,
+  IsolationType,
 } from "~/types";
 
 export interface InitialDataProps {
@@ -49,9 +52,9 @@ const initialData = {
   installationMethod: "",
   ambientTemperature: "",
   thermalResistivityOfTheSoil: "",
-  power: 0,
-  load: 0,
-  powerFactor: 0,
+  power: "0",
+  load: "0",
+  powerFactor: "0",
   amountOfCables: "0",
 };
 
@@ -92,19 +95,26 @@ const numberOfLoadedVeins = [
   },
 ];
 
-const isolationMaterials = [
-  {
-    label: "PVC",
-    value: "PVC",
-  },
-  {
-    label: "XLPE",
-    value: "XLPE",
-  },
-  {
-    label: "B2ca",
-    value: "B2ca",
-  },
+const resistivityOptions: Option[] = [
+  { label: "0.5", value: "0.5" },
+  { label: "0.7", value: "0.7" },
+  { label: "1", value: "1" },
+  { label: "1.5", value: "1.5" },
+  { label: "2", value: "2" },
+  { label: "2.5", value: "2.5" },
+  { label: "3", value: "3" },
+];
+
+const amountOfCables: Option[] = [
+  { label: "1", value: "1" },
+  { label: "2", value: "2" },
+  { label: "3", value: "3" },
+  { label: "4", value: "4" },
+  { label: "5", value: "5" },
+  { label: "6", value: "6" },
+  { label: "7", value: "7" },
+  { label: "8", value: "8" },
+  { label: "9", value: "9" },
 ];
 
 const cables: CableType[] = ["YDY", "YDYp", "YKY", "YKXS", "N2XH", "YAKXS"];
@@ -141,7 +151,6 @@ const cablesEnvironments: CableEnvironment[] = [
       "E",
       "D2",
       "D1",
-      "F",
     ],
     availableInstallationTypesForOneConductorLoad: ["A1", "B1", "F", "D2"],
     availableNumberOfLoadedVeins: ["one", "two", "multi"],
@@ -212,7 +221,6 @@ const FormPage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
   };
 
   const getFilteredCables = () => {
@@ -240,7 +248,6 @@ const FormPage = () => {
     if (formData.ambientTemperature) {
       availableCables = availableCables.filter((cable) => {
         const env = cablesEnvironments.find((env) => env.name === cable);
-        console.log(env?.maxTemperature, parseInt(formData.ambientTemperature));
         return (
           (env?.maxTemperature ?? 0) >= parseInt(formData.ambientTemperature)
         );
@@ -346,33 +353,36 @@ const FormPage = () => {
     })) as Option[];
   };
 
-  const resistivityOptions: Option[] = [
-    { label: "0.5", value: "0.5" },
-    { label: "0.7", value: "0.7" },
-    { label: "1", value: "1" },
-    { label: "1.5", value: "1.5" },
-    { label: "2", value: "2" },
-    { label: "2.5", value: "2.5" },
-    { label: "3", value: "3" },
-  ];
+  const getCableFromFormValues = () => {
+    const res = getCable(
+      formData.typeOfMetal as CableMaterial,
+      formData.isolationMaterial as IsolationType,
+      formData.installationLocation as Environment,
+      parseInt(formData.ambientTemperature),
+      formData.installationMethod as InstallationType,
+      formData.numberOfLoadedVeins as ConductorLoad,
+      6,
+      1.5,
+      {
+        numberOfPhases: formData.numberOfLoadedVeins === "two" ? 1 : 3,
+        power: 6734,
+        powerCooficient: 0.8,
+      },
+      getFilteredCables(),
+      formData.numberOfLoadedVeins === "one"
+        ? "1x"
+        : formData.numberOfLoadedVeins === "two"
+          ? "3x"
+          : "5x",
+    );
 
-  const amountOfCables: Option[] = [
-    { label: "1", value: "1" },
-    { label: "2", value: "2" },
-    { label: "3", value: "3" },
-    { label: "4", value: "4" },
-    { label: "5", value: "5" },
-    { label: "6", value: "6" },
-    { label: "7", value: "7" },
-    { label: "8", value: "8" },
-    { label: "9", value: "9" },
-  ];
+    console.log(res);
+  };
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center">
       <h1 className="pb-4 text-3xl">Formularz zgłoszeniowy</h1>
       <form onSubmit={handleSubmit} className="w-1/2">
-        {/* {renderCurrentFormStep(step)} */}
         <Select
           label="Wybierz tworzywo"
           defaultOptionLabel="Wybierz tworzywo..."
@@ -528,6 +538,7 @@ const FormPage = () => {
           Wyslij
         </button>
       </form>
+      <button onClick={getCableFromFormValues}>Jaki kabel wariacie</button>
       {getFilteredCables().join(", ")}
     </div>
   );
