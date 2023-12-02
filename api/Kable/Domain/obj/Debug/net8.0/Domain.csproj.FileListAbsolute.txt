@@ -1,0 +1,12 @@
+C:\hackathon\hackathon-23\api\Kable\Domain\bin\Debug\net8.0\Domain.deps.json
+C:\hackathon\hackathon-23\api\Kable\Domain\bin\Debug\net8.0\Domain.dll
+C:\hackathon\hackathon-23\api\Kable\Domain\bin\Debug\net8.0\Domain.pdb
+C:\hackathon\hackathon-23\api\Kable\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\hackathon\hackathon-23\api\Kable\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\hackathon\hackathon-23\api\Kable\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\hackathon\hackathon-23\api\Kable\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\hackathon\hackathon-23\api\Kable\Domain\obj\Debug\net8.0\Domain.sourcelink.json
+C:\hackathon\hackathon-23\api\Kable\Domain\obj\Debug\net8.0\Domain.dll
+C:\hackathon\hackathon-23\api\Kable\Domain\obj\Debug\net8.0\refint\Domain.dll
+C:\hackathon\hackathon-23\api\Kable\Domain\obj\Debug\net8.0\Domain.pdb
+C:\hackathon\hackathon-23\api\Kable\Domain\obj\Debug\net8.0\ref\Domain.dll
