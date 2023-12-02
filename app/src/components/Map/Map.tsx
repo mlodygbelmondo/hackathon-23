@@ -7,8 +7,9 @@ import GoogleMap from "google-maps-react-markers";
 import { DEFAULT_MAP_CENTER, MAP_ZOOM } from "~/utils/consts";
 import Marker from "./Marker";
 import { env } from "~/env";
+import { type Request } from "~/interfaces/common";
 
-const Map = ({ requests }: { requests: any }) => {
+const Map = ({ requests }: { requests: Request[] }) => {
   const mapRef = useRef<google.maps.Map>();
   const [, setMapReady] = useState(false);
 
@@ -26,7 +27,7 @@ const Map = ({ requests }: { requests: any }) => {
       lat,
       lng,
     });
-    mapRef.current.setZoom(MAP_ZOOM.REPORT);
+    mapRef.current.setZoom(MAP_ZOOM.REQUEST);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -44,7 +45,11 @@ const Map = ({ requests }: { requests: any }) => {
         options={mapOptions}
         defaultCenter={DEFAULT_MAP_CENTER}
         onGoogleApiLoaded={onGoogleApiLoaded}
-      />
+      >
+        {requests.map((request) => (
+          <Marker lat={request.lat} lng={request.lng} onClick={onMarkerClick} />
+        ))}
+      </GoogleMap>
     </div>
   );
 };
