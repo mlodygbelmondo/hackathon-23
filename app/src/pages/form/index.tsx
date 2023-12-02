@@ -33,7 +33,7 @@ const FormPage = () => {
     console.log(formData);
   };
 
-  const CurrentFormStep = ({ step }: { step: number }) => {
+  const renderCurrentFormStep = (step: number) => {
     switch (step) {
       case 1:
         return (
@@ -123,7 +123,7 @@ const FormPage = () => {
     <div className="flex h-screen w-screen flex-col items-center justify-center">
       <h1 className="pb-4 text-3xl">Formularz zgłoszeniowy</h1>
       <form onSubmit={handleSubmit} className="w-1/2">
-        <CurrentFormStep step={step} />
+        {renderCurrentFormStep(step)}
       </form>
     </div>
   );
