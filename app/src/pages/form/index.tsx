@@ -33,6 +33,9 @@ const FormPage = () => {
     console.log(formData);
   };
 
+  const nextStep = () => setStep((prev) => prev + 1);
+  const previousStep = () => setStep((prev) => prev - 1);
+
   const renderCurrentFormStep = (step: number) => {
     switch (step) {
       case 1:
@@ -45,7 +48,7 @@ const FormPage = () => {
               }));
             }}
             valueInput={formData.typeOfMetal}
-            nextStep={() => setStep((prev) => prev + 1)}
+            nextStep={nextStep}
           />
         );
       case 2:
@@ -58,8 +61,8 @@ const FormPage = () => {
               }));
             }}
             valueInput={formData.typeOfInsulatingMaterial}
-            nextStep={() => setStep((prev) => prev + 1)}
-            previousStep={() => setStep((prev) => prev - 1)}
+            nextStep={nextStep}
+            previousStep={previousStep}
           />
         );
       case 3:
@@ -72,8 +75,8 @@ const FormPage = () => {
               }));
             }}
             valueInput={formData.numberOfLoadedVeins}
-            nextStep={() => setStep((prev) => prev + 1)}
-            previousStep={() => setStep((prev) => prev - 1)}
+            nextStep={nextStep}
+            previousStep={previousStep}
           />
         );
       case 4:
@@ -86,8 +89,8 @@ const FormPage = () => {
               }));
             }}
             valueInput={formData.instalationMethod}
-            nextStep={() => setStep((prev) => prev + 1)}
-            previousStep={() => setStep((prev) => prev - 1)}
+            nextStep={nextStep}
+            previousStep={previousStep}
           />
         );
       case 5:
@@ -100,8 +103,8 @@ const FormPage = () => {
               }));
             }}
             valueInput={formData.ambientTemperature}
-            nextStep={() => setStep((prev) => prev + 1)}
-            previousStep={() => setStep((prev) => prev - 1)}
+            nextStep={nextStep}
+            previousStep={previousStep}
           />
         );
       case 6:
@@ -113,7 +116,7 @@ const FormPage = () => {
                 thermalResistivityOfTheSoil: e.target.value,
               }));
             }}
-            previousStep={() => setStep((prev) => prev - 1)}
+            previousStep={previousStep}
           />
         );
     }
