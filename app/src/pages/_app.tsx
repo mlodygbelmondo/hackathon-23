@@ -1,20 +1,39 @@
+import type { NextPage } from "next";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { type AppType } from "next/app";
-import Script from "next/script";
+import type { AppProps } from "next/app";
+import type { ReactElement, ReactNode } from "react";
+import PrelineScript from "~/components/PrelineScript";
 
 import "~/styles/globals.css";
 
-const MyApp: AppType<{ session: Session | null }> = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}) => {
-  return (
-    <SessionProvider session={session}>
-      <Script src="./node_modules/preline/dist/preline.js" />
-      <Component {...pageProps} />
-    </SessionProvider>
-  );
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
 };
+
+type AppPropsWithLayout<P> = AppProps<P> & {
+  Component: NextPageWithLayout<P>;
+};
+
+function MyApp({
+  Component,
+  pageProps,
+}: AppPropsWithLayout<{ session: Session }>) {
+  const getLayout = Component.getLayout ?? ((page: ReactNode) => page);
+
+  return (
+    <div>
+      <PrelineScript />
+      <SessionProvider session={pageProps.session}>
+        {getLayout(
+          <>
+            <Component {...pageProps} />
+          </>,
+        )}
+      </SessionProvider>
+    </div>
+  );
+}
 
 export default MyApp;

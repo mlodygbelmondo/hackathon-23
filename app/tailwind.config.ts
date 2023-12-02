@@ -4,11 +4,7 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 export default {
   content: ["./node_modules/preline/preline.js", "./src/**/*.tsx"],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-      },
-    },
+    extend: {},
   },
-  plugins: [require("preline/plugin")],
+  plugins: [require("preline/plugin"), require("@tailwindcss/forms")],
 } satisfies Config;
