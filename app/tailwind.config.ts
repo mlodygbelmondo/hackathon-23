@@ -15,5 +15,9 @@ export default {
     extend: {},
   },
   darkMode: "class",
-  plugins: [require("preline/plugin"), require("@tailwindcss/forms")],
+  plugins: [
+    require("preline/plugin"),
+    require("@tailwindcss/forms"),
+    require("daisyui"),
+  ],
 } satisfies Config;

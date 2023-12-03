@@ -1,6 +1,5 @@
 import { type ReactNode } from "react";
-import Header from "~/components/DashboardLayout/Header";
-import Sidebar from "~/components/DashboardLayout/Sidebar";
+import Navbar from "~/components/DashboardLayout/Navbar";
 
 interface Props {
   children: ReactNode;
@@ -8,12 +7,9 @@ interface Props {
 
 const DashboardLayout = ({ children }: Props) => {
   return (
-    <div className="h-[100vh] bg-gray-50 dark:bg-slate-900">
-      <Header />
-      <Sidebar />
-      <div className="relative top-[71px] h-[calc(100%-71px)] w-full px-4 pt-6 sm:px-6 md:px-8 lg:ps-72">
-        {children}
-      </div>
+    <div className="h-[100vh]">
+      <Navbar />
+      <div className="h-[calc(100%-80px)] pr-4">{children}</div>
     </div>
   );
 };

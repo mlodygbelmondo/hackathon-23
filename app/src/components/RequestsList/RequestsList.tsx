@@ -7,7 +7,7 @@ interface Props {
 
 const RequestsList = ({ requests }: Props) => {
   return (
-    <div className="flex h-[540px] w-[45%] flex-col items-center gap-2 rounded-2xl border border-gray-200 bg-white pt-4 shadow-xl shadow-gray-100">
+    <div className="mr-2 flex h-full w-[45%] flex-col items-center gap-2 rounded-2xl border border-gray-200 bg-white pt-4 shadow-sm shadow-gray-100">
       <p className="w-full px-8 text-left text-2xl font-bold text-gray-900">
         Aktywne zgłoszenia
       </p>
