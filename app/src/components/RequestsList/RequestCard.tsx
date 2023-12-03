@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import { FaCalendar } from "react-icons/fa";
@@ -32,6 +33,11 @@ const RequestCard = ({ request, isAdmin }: Props) => {
       type: "info",
     });
   };
+
+  const {} = useQuery({
+    queryKey: ["requests"],
+    queryFn: () => {},
+  });
 
   return (
     <div

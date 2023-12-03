@@ -6,57 +6,6 @@ import RequestsList from "~/components/RequestsList/RequestsList";
 import { type NextPageWithLayout } from "~/pages/_app";
 import DashboardLayout from "./layout";
 
-const mockedRequests = [
-  {
-    id: "1",
-    lat: 51.11,
-    lng: 17.03,
-    cableName: "essa kabel",
-    author: "Jan Kowalski",
-    date: "2021-10-10",
-  },
-  {
-    id: "2",
-    lat: 61.11,
-    lng: 17.03,
-    cableName: "essa kabel",
-    author: "Jan Kowalski",
-    date: "2021-10-10",
-  },
-  {
-    id: "3",
-    lat: 55.11,
-    lng: 17.03,
-    cableName: "essa kabel",
-    author: "Jan Kowalski",
-    date: "2021-10-10",
-  },
-  {
-    id: "4",
-    lat: 58.11,
-    lng: 17.03,
-    cableName: "essa kabel",
-    author: "Jan Kowalski",
-    date: "2021-10-10",
-  },
-  {
-    id: "5",
-    lat: 49.11,
-    lng: 17.03,
-    cableName: "essa kabel",
-    author: "Jan Kowalski",
-    date: "2021-10-10",
-  },
-  {
-    id: "6",
-    lat: 47.11,
-    lng: 17.03,
-    cableName: "essa kabel",
-    author: "Jan Kowalski",
-    date: "2021-10-10",
-  },
-];
-
 const Page: NextPageWithLayout = () => {
   const { data } = useQuery({
     queryKey: ["requests"],

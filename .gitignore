@@ -1,6 +1,4 @@
 /.idea
-/api/Kable/WebAPI/appsettings.json
-/api/Kable/WebAPI/appsettings.Development.json
 /api/Kable/WebAPI/obj
 /api/Kable/Infrastucture/obj
 /api/Kable/Domain/obj

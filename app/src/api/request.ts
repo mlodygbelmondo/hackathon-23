@@ -84,4 +84,19 @@ export const _getAllRequests = async (): Promise<Request[]> => {
   return res.data ?? [];
 };
 
-export const _getResultForRequest = async (resultId: number) => {};
+interface Result {
+  cableType: number;
+  cableStrands: string;
+  charge: number;
+  installationMethod: number;
+  environmentalConditions: number;
+  link: string;
+  linkPhoto: string;
+}
+
+export const _getResultForRequest = async (
+  resultId: number,
+): Promise<Result[]> => {
+  const res = await axios.get(`http://localhost:5176/api/Result/${resultId}`);
+  return res.data;
+};
