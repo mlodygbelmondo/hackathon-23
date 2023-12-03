@@ -16,7 +16,6 @@ const Input = ({
         {label}
       </label>
       <input
-        type="number"
         placeholder={placeholderValue}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           onChange(e.target.value);

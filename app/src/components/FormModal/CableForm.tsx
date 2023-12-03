@@ -219,10 +219,6 @@ const cablesEnvironments: CableEnvironment[] = [
 const CableForm = () => {
   const [formData, setFormData] = useState<InitialDataProps>(initialData);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
-
   const getFilteredCables = () => {
     let availableCables: CableType[] = cables;
 
@@ -361,12 +357,15 @@ const CableForm = () => {
       parseInt(formData.ambientTemperature),
       formData.installationMethod as InstallationType,
       formData.numberOfLoadedVeins as ConductorLoad,
-      6,
-      1.5,
+      parseInt(formData.amountOfCables),
+      parseFloat(formData.thermalResistivityOfTheSoil),
       {
         numberOfPhases: formData.numberOfLoadedVeins === "two" ? 1 : 3,
-        power: 6734,
-        powerCooficient: 0.8,
+        power: formData.power ? parseFloat(formData.power) : 0,
+        powerCooficient: formData.powerFactor
+          ? parseFloat(formData.powerFactor)
+          : 0,
+        loadCurrent: formData.load ? parseFloat(formData.load) : 0,
       },
       getFilteredCables(),
       formData.numberOfLoadedVeins === "one"
@@ -377,6 +376,14 @@ const CableForm = () => {
     );
 
     console.log(res);
+    return res;
+  };
+
+  const [result, setResult] = useState<ReturnType<typeof getCable>>([]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setResult(getCableFromFormValues());
   };
 
   return (
@@ -537,8 +544,27 @@ const CableForm = () => {
           Wyslij
         </button>
       </form>
-      <button onClick={getCableFromFormValues}>Jaki kabel wariacie</button>
       {getFilteredCables().join(", ")}
+      {result.length > 0 && (
+        <div className="w-full">
+          <p className="mb-2 font-bold">Dostępne opcje dla tych parametrów: </p>
+          <div className="flex flex-col gap-2">
+            {result.map((res) => (
+              <div className="flex flex-col gap-2 rounded-lg border border-white p-2">
+                <p>Nazwa kabla: {res.cableName}</p>
+                <p>Liczba żył: {res.numberOfVeins}</p>
+                <p>Przekrój zyły: {res.crossSectionOfVein}</p>
+                <p>Rodzaj instalacji {res.installationType}</p>
+                <p>Obciązenie {res.load} A</p>
+                <p>
+                  Lokalizacja montowania:{" "}
+                  {res.mountLocalisation === "air" ? "W powietrzu" : "W ziemi"}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

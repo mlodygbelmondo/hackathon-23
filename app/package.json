@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.7.1",
+    "@tanstack/react-query": "^5.12.2",
     "@types/google.maps": "^3.54.10",
+    "axios": "^1.6.2",
     "clsx": "^2.0.0",
     "google-maps-react-markers": "^2.0.7",
     "jotai": "^2.6.0",
