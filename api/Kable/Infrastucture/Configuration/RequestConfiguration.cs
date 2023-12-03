@@ -15,9 +15,10 @@ public class RequestConfiguration : IEntityTypeConfiguration<Request>
         builder.Property(x => x.Longitude).IsRequired();
         builder.Property(x => x.RequestState).IsRequired();
         builder.Property(x => x.CreatedAt).IsRequired();
-        builder.HasOne(x => x.User)
-            .WithMany(x => x.Requests)
-            .HasForeignKey(x => x.UserId);
+        
+        builder.Property(x=>x.FirstName).HasMaxLength(50).IsRequired();
+        builder.Property(x=>x.LastName).HasMaxLength(50).IsRequired();
+        
         builder.HasOne(x => x.Result)
             .WithOne(x => x.Request)
             .HasForeignKey<Request>(x => x.ResultId);

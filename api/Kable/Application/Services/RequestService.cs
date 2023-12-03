@@ -24,7 +24,6 @@ public class RequestService : IRequestService
     {
         var request = await _requestRepository.GetRequestAsync(id);
         return request.AsRequestDto();
-
     }
 
     public async Task<IEnumerable<GetRequestDto>> GetRequestsPending()
@@ -49,15 +48,10 @@ public class RequestService : IRequestService
     {
         var result = await _resultRepository.GetResultsAsync();
         var resultId = result.Last().Id;
-         var newRequest = new Request
-        {
-            UserId = _userContextService.GetUserId,
-            ResultId = resultId,
-            RequestState = 0,
-            CreatedAt = DateTime.Now,
-            Latitude = request.Latitude,
-            Longitude = request.Longitude,
-        };
+
+        var newRequest = request.AsRequest();
+        newRequest.ResultId = resultId;
+        newRequest.RequestState = 0;
         await _requestRepository.CreateRequestAsync(newRequest);
         return newRequest;
     }

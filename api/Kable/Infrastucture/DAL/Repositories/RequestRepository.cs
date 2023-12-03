@@ -17,7 +17,6 @@ public class RequestRepository : IRequestRepository
 
     public IQueryable<Request> GetRequests() => _context.Requests
         .Include(x=>x.Result)
-        .Include(x=>x.User)
         .AsQueryable();
 
     public async Task CreateRequestAsync(Request request)

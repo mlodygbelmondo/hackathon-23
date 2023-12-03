@@ -49,5 +49,13 @@ public class AccountController : ControllerBase
         var token = await _accountService.GenerateJwt(loginDto);
         return Ok(token);
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetUsersAsync()
+    {
+        var users = await _accountService.GetUsersAsync();
+        return Ok(users);
+    }
+    
 
 }

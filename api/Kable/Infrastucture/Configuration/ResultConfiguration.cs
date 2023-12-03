@@ -17,5 +17,6 @@ public class ResultConfiguration : IEntityTypeConfiguration<Result>
         builder.Property(x => x.InstallationMethod).IsRequired();
         builder.Property(x => x.EnvironmentalConditions).IsRequired();
         builder.Property(x => x.Link).HasMaxLength(250).IsRequired();
+        builder.Property(x=>x.LinkPhoto).HasMaxLength(500).IsRequired();
     }
 }

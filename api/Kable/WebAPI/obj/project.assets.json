@@ -3142,37 +3142,35 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\piotr\\.nuget\\packages\\": {}
+    "C:\\Users\\beczk\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\hackathon\\hackathon-23\\api\\Kable\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\hackathon\\hackathon-23\\api\\Kable\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-      "outputPath": "C:\\hackathon\\hackathon-23\\api\\Kable\\WebAPI\\obj\\",
+      "projectPath": "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\beczk\\.nuget\\packages\\",
+      "outputPath": "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\beczk\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\hackathon\\hackathon-23\\api\\Kable\\Application\\Application.csproj": {
-              "projectPath": "C:\\hackathon\\hackathon-23\\api\\Kable\\Application\\Application.csproj"
+            "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\Application\\Application.csproj": {
+              "projectPath": "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\Application\\Application.csproj"
             },
-            "C:\\hackathon\\hackathon-23\\api\\Kable\\Infrastucture\\Infrastucture.csproj": {
-              "projectPath": "C:\\hackathon\\hackathon-23\\api\\Kable\\Infrastucture\\Infrastucture.csproj"
+            "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\Infrastucture\\Infrastucture.csproj": {
+              "projectPath": "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\Infrastucture\\Infrastucture.csproj"
             }
           }
         }

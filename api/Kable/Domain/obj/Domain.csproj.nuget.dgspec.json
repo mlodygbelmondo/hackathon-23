@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\hackathon\\hackathon-23\\api\\Kable\\Domain\\Domain.csproj": {}
+    "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\hackathon\\hackathon-23\\api\\Kable\\Domain\\Domain.csproj": {
+    "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\hackathon\\hackathon-23\\api\\Kable\\Domain\\Domain.csproj",
+        "projectUniqueName": "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\hackathon\\hackathon-23\\api\\Kable\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-        "outputPath": "C:\\hackathon\\hackathon-23\\api\\Kable\\Domain\\obj\\",
+        "projectPath": "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\beczk\\.nuget\\packages\\",
+        "outputPath": "F:\\studia\\hackathon\\hackathon-23\\api\\Kable\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\beczk\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

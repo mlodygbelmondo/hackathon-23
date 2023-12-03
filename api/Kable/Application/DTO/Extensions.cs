@@ -90,11 +90,10 @@ public static class Extensions
             Latitude = request.Latitude,
             Longitude = request.Longitude,
             CreatedAt = request.CreatedAt,
-            UserId = (int)request.UserId,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
             ResultId = request.ResultId
         };
-        XD.GetAccountDto = request.User.AsDto();
-        XD.GetResultDto = request.Result.AsResultdwa();
         return XD;
     }
     
@@ -104,7 +103,9 @@ public static class Extensions
         {
             Latitude = createRequestDto.Latitude,
             Longitude = createRequestDto.Longitude,
-            CreatedAt = DateTime.Now,
+            CreatedAt = DateTime.Now.ToUniversalTime(),
+            FirstName = createRequestDto.FirstName,
+            LastName = createRequestDto.LastName,
             RequestState = 0
         };
     }
