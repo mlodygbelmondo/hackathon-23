@@ -92,7 +92,8 @@ public static class Extensions
             CreatedAt = request.CreatedAt,
             FirstName = request.FirstName,
             LastName = request.LastName,
-            ResultId = request.ResultId
+            ResultId = request.ResultId,
+            RequestState = request.RequestState
         };
         return XD;
     }
