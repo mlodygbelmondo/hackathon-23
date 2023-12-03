@@ -46,8 +46,13 @@ const Map = ({ requests }: { requests: Request[] }) => {
         defaultCenter={DEFAULT_MAP_CENTER}
         onGoogleApiLoaded={onGoogleApiLoaded}
       >
-        {requests.map((request) => (
-          <Marker lat={request.lat} lng={request.lng} onClick={onMarkerClick} />
+        {requests.map((request, i) => (
+          <Marker
+            key={i}
+            lat={request.lat}
+            lng={request.lng}
+            onClick={onMarkerClick}
+          />
         ))}
       </GoogleMap>
     </div>

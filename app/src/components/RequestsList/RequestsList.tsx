@@ -13,8 +13,8 @@ const RequestsList = ({ requests }: Props) => {
       </p>
       <div className="h-0.5 w-[90%] rounded-full bg-gray-200 px-8" />
       <div className="flex h-full w-full flex-col items-center gap-2 overflow-auto px-8 pb-2 pt-1">
-        {requests.map((request) => (
-          <RequestCard request={request} />
+        {requests.map((request, i) => (
+          <RequestCard request={request} key={i} />
         ))}
       </div>
     </div>
