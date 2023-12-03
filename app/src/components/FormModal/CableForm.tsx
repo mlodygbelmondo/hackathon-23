@@ -216,7 +216,7 @@ const cablesEnvironments: CableEnvironment[] = [
   },
 ];
 
-const FormPage = () => {
+const CableForm = () => {
   const [formData, setFormData] = useState<InitialDataProps>(initialData);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -380,9 +380,8 @@ const FormPage = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center">
-      <h1 className="pb-4 text-3xl">Formularz zgłoszeniowy</h1>
-      <form onSubmit={handleSubmit} className="w-1/2">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+      <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2">
         <Select
           label="Wybierz tworzywo"
           defaultOptionLabel="Wybierz tworzywo..."
@@ -544,4 +543,4 @@ const FormPage = () => {
   );
 };
 
-export default FormPage;
+export default CableForm;

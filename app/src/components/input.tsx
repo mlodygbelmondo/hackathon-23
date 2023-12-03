@@ -11,7 +11,7 @@ const Input = ({
     <div className="flex flex-col">
       <label
         htmlFor="type-of-metal"
-        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+        className="text-content mb-2 block text-sm font-medium dark:text-white"
       >
         {label}
       </label>

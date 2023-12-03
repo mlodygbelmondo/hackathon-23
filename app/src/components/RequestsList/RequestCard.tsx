@@ -1,63 +1,96 @@
 import Image from "next/image";
 import { type Request } from "~/interfaces/common";
-import { TbTruckDelivery } from "react-icons/tb";
-import { RxCross2 } from "react-icons/rx";
-import { useState } from "react";
+
 import { TiTick } from "react-icons/ti";
+import { MdCable } from "react-icons/md";
+import { IoPerson } from "react-icons/io5";
+import { FaLocationDot } from "react-icons/fa6";
+import { FaCalendar } from "react-icons/fa";
+import { openToast } from "~/utils/toasts";
+import { selectedRequestAtom } from "~/atom/common";
+import { useAtom } from "jotai";
+import clsx from "clsx";
+import { twMerge } from "tw-merge";
 interface Props {
   request: Request;
+  isAdmin?: boolean;
 }
 
-const RequestCard = ({ request }: Props) => {
-  const [isDeliveryClicked, setIsDeliveryClicked] = useState(false);
+const RequestCard = ({ request, isAdmin }: Props) => {
+  const [selectedRequest, setSelectedRequest] = useAtom(selectedRequestAtom);
 
-  const handleDeliveryClick = () => {
-    setIsDeliveryClicked(!isDeliveryClicked);
+  const onAcceptClick = () => {
+    openToast({
+      message: "Zgłoszenie zostało zaakceptowane.",
+      type: "success",
+    });
+  };
+
+  const onDenyClick = () => {
+    openToast({
+      message: "Zgłoszenie zostało odrzucone.",
+      type: "info",
+    });
   };
 
   return (
-    <div className="mx-4 flex w-full cursor-pointer gap-4 rounded-lg border border-gray-200 bg-white px-2 py-1 shadow shadow-gray-200 transition-all hover:scale-105">
-      <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-white">
-        <Image
-          src="https://www.nkt.com.pl/imgproxy/pvTKGdlM1jMXCaTNdveZkfkGvqW0F0bj4y-B_1VweQM/rt:fit/w:378/h:294/g:ce/ex:1/el:1/aHR0cHM6Ly9ua3Qud2lkZW4ubmV0L2NvbnRlbnQvMmV1cXgzNm1waS9wbmcvWURZxbxvXzN4MSw1X3MucG5nP2xhc3RNb2RpZmllZD1UdWUrTWFyKzA4KzE0JTNBMjElM0ExNitDRVQrMjAyMg.jpeg"
-          alt="halo"
-          width={80}
-          height={80}
-        />
-      </div>
-      <div className="flex w-[calc(100%-80px)] items-center justify-between gap-2 p-1">
-        <div className="flex flex-col gap-2">
-          <p className="text-md font-bold text-gray-900">{request.cableName}</p>
-          <p className="text-sm font-medium text-gray-500">{request.date}</p>
-        </div>
-        <div className="flex gap-2">
-          <button
-            className={`${
-              isDeliveryClicked ? "hidden" : "flex"
-            } transition-all`}
-            onClick={handleDeliveryClick}
-          >
-            <TbTruckDelivery className="text-lg" />
-          </button>
-          <div
-            className={`${
-              isDeliveryClicked ? "flex" : "hidden"
-            } gap-4 transition-all`}
-          >
-            <button
-              className="flex h-8 w-8 items-center justify-center rounded-full   bg-red-500 text-white"
-              onClick={handleDeliveryClick}
-            >
-              <RxCross2 />
-            </button>
-            <button
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-500 text-white"
-              onClick={handleDeliveryClick}
-            >
-              <TiTick />
-            </button>
+    <div
+      className={twMerge(
+        clsx(
+          "card w-full border-2 border-neutral bg-neutral text-neutral-content transition-colors sm:w-[96%]",
+          selectedRequest === request.id
+            ? "shadow-border-gray-300 border-2 border-gray-300 shadow"
+            : "cursor-pointer",
+        ),
+      )}
+      onClick={() => setSelectedRequest(request.id)}
+    >
+      <div className="card-body w-full items-center px-3 py-3 text-center lg:px-8">
+        <div className="flex w-full gap-3 lg:gap-4">
+          <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-base-300 bg-white shadow shadow-gray-600">
+            <Image
+              src="https://www.nkt.com.pl/imgproxy/pvTKGdlM1jMXCaTNdveZkfkGvqW0F0bj4y-B_1VweQM/rt:fit/w:378/h:294/g:ce/ex:1/el:1/aHR0cHM6Ly9ua3Qud2lkZW4ubmV0L2NvbnRlbnQvMmV1cXgzNm1waS9wbmcvWURZxbxvXzN4MSw1X3MucG5nP2xhc3RNb2RpZmllZD1UdWUrTWFyKzA4KzE0JTNBMjElM0ExNitDRVQrMjAyMg.jpeg"
+              alt="halo"
+              width={64}
+              height={64}
+            />
+          </div>
+          <div className="flex w-[calc(100%-64px)] justify-between">
+            <div className="flex flex-col justify-between">
+              <p className="flex items-center gap-1 text-sm font-bold lg:gap-2">
+                <MdCable /> {request.cableName}
+              </p>
+              <p className="flex items-center gap-1 text-xs font-bold lg:gap-2">
+                <FaCalendar /> {request.date}
+              </p>
+            </div>
+            <div className="flex flex-col justify-between">
+              <p className="flex items-center gap-1 text-xs font-medium lg:gap-2">
+                <IoPerson /> Piotr Kaczorowski
+              </p>
+              <p className="flex items-center gap-1 text-xs font-medium lg:gap-2">
+                <FaLocationDot /> Gliwice
+              </p>
+            </div>
           </div>
         </div>
+        {isAdmin ? (
+          <div className="card-actions justify-end">
+            <button className="btn btn-primary" onClick={onAcceptClick}>
+              Przyjmij
+            </button>
+            <button className="btn btn-ghost" onClick={onDenyClick}>
+              Odrzuć
+            </button>
+          </div>
+        ) : (
+          // @ todo zmienilbym to na jakis status zgloszenia czy cos bo user widzi wszystkie zgloszenia swoje imo, admin tylko aktywne, i user powinien miec info o tym co jest przyjete a co nie
+          <div className="card-actions justify-end">
+            <button className="btn btn-primary">
+              <TiTick /> Zgłoszenie przyjęte
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

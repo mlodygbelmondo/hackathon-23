@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }: Props) => {
   return (
     <div className="h-[100vh]">
       <Navbar />
-      <div className="h-[calc(100%-80px)] pr-4">{children}</div>
+      <div className="h-[calc(100%-80px)] px-4 lg:pl-0">{children}</div>
     </div>
   );
 };
