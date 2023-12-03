@@ -25,7 +25,7 @@ interface Props {
 const RequestCard = ({ request, isAdmin }: Props) => {
   const [selectedRequest, setSelectedRequest] = useAtom(selectedRequestAtom);
 
-  const { refetchQueries } = useQueryClient();
+  const client = useQueryClient();
 
   const { data: result } = useQuery({
     queryKey: ["result", request.resultId],
@@ -36,7 +36,7 @@ const RequestCard = ({ request, isAdmin }: Props) => {
     mutationKey: ["accept", request.id],
     mutationFn: (state: 1 | 2) => _updateRequestState(request.id, state),
     onSuccess: () => {
-      refetchQueries({
+      client.refetchQueries({
         queryKey: ["requests"],
         type: "active",
       });
@@ -59,6 +59,17 @@ const RequestCard = ({ request, isAdmin }: Props) => {
     });
   };
 
+  console.log(request.latitude, request.longitude);
+
+  const { data } = useQuery({
+    queryKey: ["geocode", request.resultId],
+    queryFn: () =>
+      fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${request.latitude},${request.longitude}&sensor=true&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}`,
+      ).then((res) => res.json()),
+  });
+
+  console.log(data?.results[0].formatted_address);
   return result ? (
     <div
       className={twMerge(
@@ -74,7 +85,13 @@ const RequestCard = ({ request, isAdmin }: Props) => {
       <div className="card-body w-full items-center px-3 py-3 text-center lg:px-8">
         <div className="flex w-full gap-3 lg:gap-4">
           <div className="border-base-300 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border bg-white shadow shadow-gray-600">
-            <Image src={result.linkPhoto} alt="halo" width={64} height={64} />
+            <a
+              className="mt-2 text-blue-700"
+              target="_blank"
+              href={result.link}
+            >
+              <Image src={result.linkPhoto} alt="halo" width={64} height={64} />
+            </a>
           </div>
           <div className="flex w-[calc(100%-64px)] justify-between">
             <div className="flex flex-col justify-between">
@@ -84,13 +101,6 @@ const RequestCard = ({ request, isAdmin }: Props) => {
               <p className="flex items-center gap-1 text-xs font-bold lg:gap-2">
                 <FaCalendar /> {new Date(request.createdAt).toLocaleString()}
               </p>
-              <a
-                className="mt-2 text-blue-700"
-                target="_blank"
-                href={result.link}
-              >
-                Link to strony NTK
-              </a>
             </div>
             <div className="flex flex-col justify-between">
               <p className="flex items-center gap-1 text-xs font-medium lg:gap-2">
@@ -98,7 +108,7 @@ const RequestCard = ({ request, isAdmin }: Props) => {
               </p>
               <p className="flex items-center gap-1 text-xs font-medium lg:gap-2">
                 {/* @ todo/piotr - change it to fetch city based on latitude longitude */}
-                <FaLocationDot /> Gliwice
+                <FaLocationDot /> {data?.results[0].formatted_address}
               </p>
             </div>
           </div>
