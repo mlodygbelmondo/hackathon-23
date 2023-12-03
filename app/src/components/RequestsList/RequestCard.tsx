@@ -66,9 +66,10 @@ const RequestCard = ({ request, isAdmin }: Props) => {
             </div>
             <div className="flex flex-col justify-between">
               <p className="flex items-center gap-1 text-xs font-medium lg:gap-2">
-                <IoPerson /> Piotr Kaczorowski
+                <IoPerson /> {request.author}
               </p>
               <p className="flex items-center gap-1 text-xs font-medium lg:gap-2">
+                {/* @ todo/piotr - change it to fetch city based on latitude longitude */}
                 <FaLocationDot /> Gliwice
               </p>
             </div>
@@ -84,7 +85,7 @@ const RequestCard = ({ request, isAdmin }: Props) => {
             </button>
           </div>
         ) : (
-          // @ todo zmienilbym to na jakis status zgloszenia czy cos bo user widzi wszystkie zgloszenia swoje imo, admin tylko aktywne, i user powinien miec info o tym co jest przyjete a co nie
+          // @ todo/piotr - zmienilbym to na jakis status zgloszenia czy cos bo user widzi wszystkie zgloszenia swoje imo, admin tylko aktywne, i user powinien miec info o tym co jest przyjete a co nie
           <div className="card-actions justify-end">
             <button className="btn btn-primary">
               <TiTick /> Zgłoszenie przyjęte
