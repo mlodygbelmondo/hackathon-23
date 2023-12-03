@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-const selectedRequestAtom = atom("");
+const selectedRequestAtom = atom(-1);
 const isFormModalOpenAtom = atom(false);
 
-export { selectedRequestAtom, isFormModalOpenAtom };
+export { isFormModalOpenAtom, selectedRequestAtom };

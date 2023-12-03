@@ -1,4 +1,8 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  HydrationBoundary,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import type { NextPage } from "next";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -28,6 +32,7 @@ function MyApp({
 
   return (
     <QueryClientProvider client={queryClient}>
+      <HydrationBoundary state={pageProps.dehydratedState}></HydrationBoundary>
       <div>
         <Toaster />
         <PrelineScript />

@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { type RefObject, useRef, useState, useEffect } from "react";
-import { mapOptions } from "~/utils/mapOptions";
 import GoogleMap from "google-maps-react-markers";
-import { DEFAULT_MAP_CENTER, MAP_ZOOM } from "~/utils/consts";
-import Marker from "./Marker";
-import { env } from "~/env";
-import { type Request } from "~/interfaces/common";
 import { useAtom } from "jotai";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { selectedRequestAtom } from "~/atom/common";
+import { env } from "~/env";
+import { DEFAULT_MAP_CENTER, MAP_ZOOM } from "~/utils/consts";
+import { mapOptions } from "~/utils/mapOptions";
+import { type Request } from "../../api/request";
+import Marker from "./Marker";
 
 const Map = ({ requests }: { requests: Request[] }) => {
   const [selectedRequest, setSelectedRequest] = useAtom(selectedRequestAtom);
@@ -23,7 +23,7 @@ const Map = ({ requests }: { requests: Request[] }) => {
     setMapReady(true);
   };
 
-  const onMarkerClick = (lat: number, lng: number, id: string) => {
+  const onMarkerClick = (lat: number, lng: number, id: number) => {
     if (!mapRef.current?.setCenter) return;
 
     mapRef.current.setCenter({
@@ -43,8 +43,8 @@ const Map = ({ requests }: { requests: Request[] }) => {
     if (!request) return;
 
     mapRef.current.setCenter({
-      lat: request.lat,
-      lng: request.lng,
+      lat: request.latitude,
+      lng: request.longitude,
     });
     mapRef.current.setZoom(MAP_ZOOM.REQUEST);
   }, [selectedRequest]);
@@ -68,8 +68,8 @@ const Map = ({ requests }: { requests: Request[] }) => {
         {requests.map((request, i) => (
           <Marker
             key={i}
-            lat={request.lat}
-            lng={request.lng}
+            lat={request.latitude}
+            lng={request.longitude}
             id={request.id}
             onClick={onMarkerClick}
             isSelected={selectedRequest === request.id}

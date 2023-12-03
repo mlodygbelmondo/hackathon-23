@@ -4,8 +4,8 @@ import { FaLocationDot } from "react-icons/fa6";
 interface Props {
   lat: number;
   lng: number;
-  id: string;
-  onClick: (lat: number, lng: number, id: string) => void;
+  id: number;
+  onClick: (lat: number, lng: number, id: number) => void;
   isSelected: boolean;
 }
 const Marker = ({ lat, lng, id, onClick, isSelected }: Props) => {

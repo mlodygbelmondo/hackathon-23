@@ -1,8 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import type { ReactElement } from "react";
-import { type NextPageWithLayout } from "~/pages/_app";
-import DashboardLayout from "./layout";
+import { _getAllRequests } from "~/api/request";
 import Map from "~/components/Map/Map";
 import RequestsList from "~/components/RequestsList/RequestsList";
+import { type NextPageWithLayout } from "~/pages/_app";
+import DashboardLayout from "./layout";
 
 const mockedRequests = [
   {
@@ -56,13 +58,20 @@ const mockedRequests = [
 ];
 
 const Page: NextPageWithLayout = () => {
+  const { data } = useQuery({
+    queryKey: ["requests"],
+    queryFn: _getAllRequests,
+  });
+
+  console.log(data);
+
   return (
     <div className="flex h-full w-full flex-col gap-2">
       <div className="flex h-full w-full gap-4">
         <div className="hidden h-full w-7/12 lg:block">
-          <Map requests={mockedRequests} />
+          <Map requests={data ?? []} />
         </div>
-        <RequestsList requests={mockedRequests} isAdmin />
+        <RequestsList requests={data ?? []} isAdmin />
       </div>
     </div>
   );

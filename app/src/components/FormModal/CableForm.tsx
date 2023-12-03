@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getCable } from "~/algorytm";
+import { _pushRequest } from "~/api/request";
 import Input from "~/components/input";
 import Select, { type Option } from "~/components/select";
 import type {
@@ -218,6 +219,7 @@ const cablesEnvironments: CableEnvironment[] = [
 
 const CableForm = () => {
   const [formData, setFormData] = useState<InitialDataProps>(initialData);
+  const [isRequestSent, setIsRequestSent] = useState(false);
 
   const getFilteredCables = () => {
     let availableCables: CableType[] = cables;
@@ -386,7 +388,11 @@ const CableForm = () => {
     setResult(getCableFromFormValues());
   };
 
-  return (
+  return isRequestSent ? (
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+      <h3>Wysłano zapytanie o kable!</h3>
+    </div>
+  ) : (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2">
       <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2">
         <Select
@@ -541,10 +547,9 @@ const CableForm = () => {
           className="mt-4 w-1/3 rounded-xl  bg-blue-500 px-6 py-2  hover:bg-blue-700"
           type="submit"
         >
-          Wyslij
+          Sprawdz dostępne kable
         </button>
       </form>
-      {getFilteredCables().join(", ")}
       {result.length > 0 && (
         <div className="w-full">
           <p className="mb-2 font-bold">Dostępne opcje dla tych parametrów: </p>
@@ -560,6 +565,29 @@ const CableForm = () => {
                   Lokalizacja montowania:{" "}
                   {res.mountLocalisation === "air" ? "W powietrzu" : "W ziemi"}
                 </p>
+                <button
+                  className="mt-4  rounded-xl  bg-blue-500 px-6 py-2  hover:bg-blue-700"
+                  onClick={async () => {
+                    const ok = await _pushRequest({
+                      cableName: res.cableName,
+                      crossSectionOfVeins: res.crossSectionOfVein,
+                      installationType: res.installationType,
+                      firstName: "Jan",
+                      lastName: "Kowalski",
+                      latitude: 52.2297,
+                      load: res.load,
+                      longitude: 21.0122,
+                      mountLocation: res.mountLocalisation,
+                      numberOfVeins: res.numberOfVeins,
+                    });
+
+                    if (ok) {
+                      setIsRequestSent(true);
+                    }
+                  }}
+                >
+                  Zamów kabel do swojej lokacji
+                </button>
               </div>
             ))}
           </div>

@@ -33,8 +33,8 @@ builder.Services.AddAuthentication(option =>
 });
 
 
-builder.Services.AddCors(opt=>opt.AddPolicy("CorsPolicy",policy=>{
-    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://127.0.0.1:3000");
+builder.Services.AddCors(opt=>opt.AddPolicy("CorsPolicy",
+    policy => { policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(new String[]{"http://127.0.0.1:3000", "http://localhost:3000" });
 }));
 
 builder.Services.AddApplication(builder.Configuration);
