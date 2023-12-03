@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-
+import { RxAvatar } from "react-icons/rx";
 const Header = () => {
   const { pathname } = useRouter();
 
@@ -13,15 +13,13 @@ const Header = () => {
         className="mx-auto flex w-full basis-full items-center px-4 sm:px-6 md:px-8"
         aria-label="Global"
       >
-        <div className="me-5 lg:me-0 lg:hidden">
-          <a
-            className="flex-none text-xl font-bold dark:text-white"
-            href="#"
-            aria-label="Brand"
-          >
-            Pogotowie kablowe
-          </a>
-        </div>
+        <a
+          className="flex-none text-xl font-bold dark:text-white"
+          href="#"
+          aria-label="Brand"
+        >
+          Pogotowie kablowe 🚑
+        </a>
 
         <div className="ms-auto flex w-full items-center justify-end sm:order-3 sm:justify-between sm:gap-x-3">
           <div className="text-2xl font-bold"></div>
@@ -143,7 +141,9 @@ const Header = () => {
                 id="hs-dropdown-with-header"
                 type="button"
                 className="inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full border border-transparent text-sm font-semibold text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-              ></button>
+              >
+                <RxAvatar className="text-xl" />
+              </button>
               <div
                 className="hs-dropdown-menu duration hidden min-w-[15rem] rounded-lg bg-white p-2 opacity-0 shadow-md transition-[opacity,margin] hs-dropdown-open:opacity-100 dark:border dark:border-gray-700 dark:bg-gray-800"
                 aria-labelledby="hs-dropdown-with-header"
