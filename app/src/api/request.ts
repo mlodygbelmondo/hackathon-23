@@ -33,10 +33,35 @@ const installationTypeMap = {
   D2: 7,
 } as Record<string, number>;
 
+const reverseInstallationTypeMap = {
+  0: "A1",
+  1: "A2",
+  2: "B1",
+  3: "B2",
+  4: "E",
+  5: "F",
+  6: "D1",
+  7: "D2",
+} as Record<number, string>;
+
+const cableTypeMapReverse = {
+  0: "YDY",
+  1: "YDYp",
+  2: "YKY",
+  3: "YKXS",
+  4: "YAKXS",
+  5: "N2XH",
+} as Record<number, string>;
+
 const enviromentConditionsMap = {
   air: 0,
   ground: 1,
 } as Record<string, number>;
+
+const reverseEnviromentConditionsMap = {
+  0: "air",
+  1: "ground",
+} as Record<number, string>;
 
 export const _pushRequest = async ({
   latitude,
@@ -77,6 +102,7 @@ export interface Request {
   createdAt: string;
   latitude: number;
   longitude: number;
+  resultId: number;
 }
 
 export const _getAllRequests = async (): Promise<Request[]> => {
@@ -85,9 +111,9 @@ export const _getAllRequests = async (): Promise<Request[]> => {
 };
 
 interface Result {
-  cableType: number;
+  cableType: string;
   cableStrands: string;
-  charge: number;
+  load: number;
   installationMethod: number;
   environmentalConditions: number;
   link: string;
@@ -96,7 +122,30 @@ interface Result {
 
 export const _getResultForRequest = async (
   resultId: number,
-): Promise<Result[]> => {
+): Promise<Result> => {
   const res = await axios.get(`http://localhost:5176/api/Result/${resultId}`);
-  return res.data;
+  const data = res.data;
+  return {
+    cableType: cableTypeMapReverse[data.cableType],
+    cableStrands: data.cableStrands,
+    load: data.charge,
+    installationMethod: reverseInstallationTypeMap[data.installationMethod],
+    environmentalConditions:
+      reverseEnviromentConditionsMap[data.environmentalConditions],
+    link: data.link,
+    linkPhoto: data.linkPhoto,
+  } as unknown as Result;
+};
+
+export const _updateRequestState = async (
+  requestId: number,
+  state: 1 | 2,
+): Promise<boolean> => {
+  const res = await axios.put(
+    `http://localhost:5176/api/Request/${requestId}`,
+    {
+      requestState: state,
+    },
+  );
+  return res.status === 201;
 };

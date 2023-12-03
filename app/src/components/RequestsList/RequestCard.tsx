@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import { FaCalendar } from "react-icons/fa";
@@ -9,7 +9,11 @@ import { IoPerson } from "react-icons/io5";
 import { MdCable } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import { twMerge } from "tw-merge";
-import { type Request } from "~/api/request";
+import {
+  _getResultForRequest,
+  _updateRequestState,
+  type Request,
+} from "~/api/request";
 import { selectedRequestAtom } from "~/atom/common";
 import { openToast } from "~/utils/toasts";
 interface Props {
@@ -20,26 +24,43 @@ interface Props {
 const RequestCard = ({ request, isAdmin }: Props) => {
   const [selectedRequest, setSelectedRequest] = useAtom(selectedRequestAtom);
 
-  const onAcceptClick = () => {
+  const { refetchQueries } = useQueryClient();
+
+  const { data: result } = useQuery({
+    queryKey: ["result", request.resultId],
+    queryFn: () => _getResultForRequest(request.resultId),
+  });
+
+  const { mutateAsync: updateRequestState } = useMutation({
+    mutationKey: ["accept", request.id],
+    mutationFn: (state: 1 | 2) => _updateRequestState(request.id, state),
+    onSuccess: () => {
+      refetchQueries({
+        queryKey: ["requests"],
+        type: "active",
+      });
+    },
+  });
+
+  const onAcceptClick = async () => {
+    await updateRequestState(1);
     openToast({
       message: "Zgłoszenie zostało zaakceptowane.",
       type: "success",
     });
   };
 
-  const onDenyClick = () => {
+  const onDenyClick = async () => {
+    await updateRequestState(2);
     openToast({
       message: "Zgłoszenie zostało odrzucone.",
       type: "info",
     });
   };
 
-  const {} = useQuery({
-    queryKey: ["requests"],
-    queryFn: () => {},
-  });
+  console.log(result);
 
-  return (
+  return result ? (
     <div
       className={twMerge(
         clsx(
@@ -54,21 +75,23 @@ const RequestCard = ({ request, isAdmin }: Props) => {
       <div className="card-body w-full items-center px-3 py-3 text-center lg:px-8">
         <div className="flex w-full gap-3 lg:gap-4">
           <div className="border-base-300 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border bg-white shadow shadow-gray-600">
-            <Image
-              src="https://www.nkt.com.pl/imgproxy/pvTKGdlM1jMXCaTNdveZkfkGvqW0F0bj4y-B_1VweQM/rt:fit/w:378/h:294/g:ce/ex:1/el:1/aHR0cHM6Ly9ua3Qud2lkZW4ubmV0L2NvbnRlbnQvMmV1cXgzNm1waS9wbmcvWURZxbxvXzN4MSw1X3MucG5nP2xhc3RNb2RpZmllZD1UdWUrTWFyKzA4KzE0JTNBMjElM0ExNitDRVQrMjAyMg.jpeg"
-              alt="halo"
-              width={64}
-              height={64}
-            />
+            <Image src={result.linkPhoto} alt="halo" width={64} height={64} />
           </div>
           <div className="flex w-[calc(100%-64px)] justify-between">
             <div className="flex flex-col justify-between">
               <p className="flex items-center gap-1 text-sm font-bold lg:gap-2">
-                <MdCable /> {request.cableName}
+                <MdCable /> {result.cableType}
               </p>
               <p className="flex items-center gap-1 text-xs font-bold lg:gap-2">
                 <FaCalendar /> {new Date(request.createdAt).toLocaleString()}
               </p>
+              <a
+                className="mt-2 text-blue-700"
+                target="_blank"
+                href={result.link}
+              >
+                Link to strony NTK
+              </a>
             </div>
             <div className="flex flex-col justify-between">
               <p className="flex items-center gap-1 text-xs font-medium lg:gap-2">
@@ -100,6 +123,6 @@ const RequestCard = ({ request, isAdmin }: Props) => {
         )}
       </div>
     </div>
-  );
+  ) : null;
 };
 export default RequestCard;
