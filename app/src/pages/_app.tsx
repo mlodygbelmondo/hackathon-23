@@ -26,7 +26,7 @@ type AppPropsWithLayout<P> = AppProps<P> & {
 function MyApp({
   Component,
   pageProps,
-}: AppPropsWithLayout<{ session: Session }>) {
+}: AppPropsWithLayout<{ session: Session; dehydratedState: unknown }>) {
   const getLayout = Component.getLayout ?? ((page: ReactNode) => page);
   const [queryClient] = React.useState<QueryClient>(() => new QueryClient());
 

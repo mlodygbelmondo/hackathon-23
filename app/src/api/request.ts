@@ -109,6 +109,10 @@ export const _getAllRequests = async (): Promise<Request[]> => {
   const res = await axios.get("http://localhost:5176/api/Request/pending");
   return res.data ?? [];
 };
+export const _getPendingRequests = async (): Promise<Request[]> => {
+  const res = await axios.get("http://localhost:5176/api/Request/pending");
+  return res.data ?? [];
+};
 
 interface Result {
   cableType: string;
