@@ -1,11 +1,19 @@
 import Image from "next/image";
+import Link from "next/link";
+
+interface ModalButton extends HTMLButtonElement {
+  showModal: () => void;
+}
 
 const Navbar = () => {
+  const openFormModal = () =>
+    (document.getElementById("my_modal_3") as ModalButton).showModal();
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+          <div tabIndex={0} role="button" className="btn btn-circle btn-ghost">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -23,16 +31,18 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
           >
             <li>
-              <a>Homepage</a>
+              <Link href="/">Twoje zgłoszenia</Link>
             </li>
             <li>
-              <a>Portfolio</a>
+              <a onClick={openFormModal}>
+                <label htmlFor="my_modal_7">Stwórz zgłoszenie</label>
+              </a>
             </li>
             <li>
-              <a>About</a>
+              <Link href="/admin">Panel admina</Link>
             </li>
           </ul>
         </div>
@@ -44,7 +54,7 @@ const Navbar = () => {
         </a>
       </div>
       <div className="navbar-end">
-        <button className="btn btn-ghost btn-circle">
+        <button className="btn btn-circle btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -60,7 +70,7 @@ const Navbar = () => {
             />
           </svg>
         </button>
-        <button className="btn btn-ghost btn-circle">
+        <button className="btn btn-circle btn-ghost">
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +86,7 @@ const Navbar = () => {
                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
               />
             </svg>
-            <span className="badge badge-xs badge-primary indicator-item"></span>
+            <span className="badge indicator-item badge-primary badge-xs"></span>
           </div>
         </button>
       </div>

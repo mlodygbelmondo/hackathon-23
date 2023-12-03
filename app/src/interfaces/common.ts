@@ -1,5 +1,5 @@
 export interface Request {
-  id: number;
+  id: string;
   lat: number;
   lng: number;
   cableName: string;

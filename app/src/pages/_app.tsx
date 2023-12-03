@@ -4,8 +4,10 @@ import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import type { ReactElement, ReactNode } from "react";
 import PrelineScript from "~/components/PrelineScript";
+import { Toaster } from "react-hot-toast";
 
 import "~/styles/globals.css";
+import FormModal from "~/components/FormModal/FormModal";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -24,6 +26,7 @@ function MyApp({
 
   return (
     <div>
+      <Toaster />
       <PrelineScript />
       <SessionProvider session={pageProps.session}>
         {getLayout(
@@ -32,6 +35,7 @@ function MyApp({
           </>,
         )}
       </SessionProvider>
+      <FormModal />
     </div>
   );
 }
