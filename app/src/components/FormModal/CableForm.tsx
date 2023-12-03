@@ -12,6 +12,7 @@ import type {
   InstallationType,
   IsolationType,
 } from "~/types";
+import { DEFAULT_MAP_CENTER } from "~/utils/consts";
 
 export interface InitialDataProps {
   typeOfMetal: string;
@@ -219,7 +220,28 @@ const cablesEnvironments: CableEnvironment[] = [
 
 const CableForm = () => {
   const [formData, setFormData] = useState<InitialDataProps>(initialData);
+  const [formData2, setFormData2] = useState<{
+    lat: number;
+    lng: number;
+    firstName: string;
+    lastName: string;
+  }>({
+    lat: DEFAULT_MAP_CENTER.lat,
+    lng: DEFAULT_MAP_CENTER.lng,
+    firstName: "",
+    lastName: "",
+  });
+  const [request, setRequest] = useState<{
+    cableName: CableType;
+    crossSectionOfVein: string;
+    numberOfVeins: number;
+    load: number;
+    installationType: InstallationType;
+    mountLocalisation: Environment;
+  } | null>(null);
   const [isRequestSent, setIsRequestSent] = useState(false);
+
+  const [formStep, setFormStep] = useState(1);
 
   const getFilteredCables = () => {
     let availableCables: CableType[] = cables;
@@ -388,9 +410,56 @@ const CableForm = () => {
     setResult(getCableFromFormValues());
   };
 
-  return isRequestSent ? (
+  const requestCable = async (res: {
+    cableName: CableType;
+    crossSectionOfVein: string;
+    numberOfVeins: number;
+    load: number;
+    installationType: InstallationType;
+    mountLocalisation: Environment;
+  }) => {
+    const ok = await _pushRequest({
+      cableName: res.cableName,
+      crossSectionOfVeins: res.crossSectionOfVein,
+      installationType: res.installationType,
+      firstName: "Jan",
+      lastName: "Kowalski",
+      latitude: 52.2297,
+      load: res.load,
+      longitude: 21.0122,
+      mountLocation: res.mountLocalisation,
+      numberOfVeins: res.numberOfVeins,
+    });
+
+    if (ok) {
+      setIsRequestSent(true);
+    }
+  };
+
+  return formStep === 2 ? (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2">
-      <h3>Wysłano zapytanie o kable!</h3>
+      <div className="flex gap-4">
+        <Input
+          placeholderValue="Imię"
+          onChange={(val) =>
+            setFormData2({
+              ...formData2,
+              firstName: val,
+            })
+          }
+          label="Wpisz imię"
+        />
+        <Input
+          placeholderValue="Nazwisko"
+          onChange={(val) =>
+            setFormData2({
+              ...formData2,
+              lastName: val,
+            })
+          }
+          label="Wpisz nazwisko"
+        />
+      </div>
     </div>
   ) : (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2">
@@ -567,23 +636,9 @@ const CableForm = () => {
                 </p>
                 <button
                   className="mt-4  rounded-xl  bg-blue-500 px-6 py-2  hover:bg-blue-700"
-                  onClick={async () => {
-                    const ok = await _pushRequest({
-                      cableName: res.cableName,
-                      crossSectionOfVeins: res.crossSectionOfVein,
-                      installationType: res.installationType,
-                      firstName: "Jan",
-                      lastName: "Kowalski",
-                      latitude: 52.2297,
-                      load: res.load,
-                      longitude: 21.0122,
-                      mountLocation: res.mountLocalisation,
-                      numberOfVeins: res.numberOfVeins,
-                    });
-
-                    if (ok) {
-                      setIsRequestSent(true);
-                    }
+                  onClick={() => {
+                    setRequest(res);
+                    setFormStep(2);
                   }}
                 >
                   Zamów kabel do swojej lokacji
