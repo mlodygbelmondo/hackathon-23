@@ -7,6 +7,7 @@ namespace Application.Services.interfaces;
 public interface IRequestService
 {
     Task<GetRequestDto> GetRequestAsync(int id);
+    Task<IEnumerable<GetRequestDto>> GetRequestsAsync();
     Task<IEnumerable<GetRequestDto>> GetRequestsPending();
     Task<IEnumerable<GetRequestDto>> GetRequestsRejected();
     Task<IEnumerable<GetRequestDto>> GetRequestsAccepted();

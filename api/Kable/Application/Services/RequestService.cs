@@ -26,6 +26,12 @@ public class RequestService : IRequestService
         return request.AsRequestDto();
     }
 
+    public async Task<IEnumerable<GetRequestDto>> GetRequestsAsync()
+    {
+        var requests = _requestRepository.GetRequests();
+        return await requests.Select(x => x.AsRequestDto()).ToListAsync();
+    }
+
     public async Task<IEnumerable<GetRequestDto>> GetRequestsPending()
     {
         var requests = await _requestRepository.GetRequests().Where(x => x.RequestState == 0).ToListAsync();

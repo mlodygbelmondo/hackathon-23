@@ -15,6 +15,13 @@ public class RequestController : ControllerBase
         _requestService = requestService;
     }
     
+    [HttpGet]
+    public async Task<IActionResult> GetRequestsAsync()
+    {
+        var requests = await _requestService.GetRequestsAsync();
+        return Ok(requests);
+    }
+    
     [HttpGet("{id}")]
     public async Task<IActionResult> GetRequestAsync(int id)
     {
