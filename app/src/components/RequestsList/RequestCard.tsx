@@ -6,7 +6,8 @@ import { useAtom } from "jotai";
 import { FaCalendar } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoPerson } from "react-icons/io5";
-import { MdCable } from "react-icons/md";
+import { MdCable, MdOutlinePending } from "react-icons/md";
+import { RxCrossCircled } from "react-icons/rx";
 import { TiTick } from "react-icons/ti";
 import { twMerge } from "tw-merge";
 import {
@@ -57,8 +58,6 @@ const RequestCard = ({ request, isAdmin }: Props) => {
       type: "info",
     });
   };
-
-  console.log(result);
 
   return result ? (
     <div
@@ -116,9 +115,28 @@ const RequestCard = ({ request, isAdmin }: Props) => {
         ) : (
           // @ todo/piotr - zmienilbym to na jakis status zgloszenia czy cos bo user widzi wszystkie zgloszenia swoje imo, admin tylko aktywne, i user powinien miec info o tym co jest przyjete a co nie
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">
-              <TiTick /> Zgłoszenie przyjęte
-            </button>
+            <div
+              className={`btn ${
+                request.requestState === 0
+                  ? "bg-yellow-700"
+                  : request.requestState === 1
+                    ? "bg-green-600"
+                    : "bg-red-600"
+              }`}
+            >
+              {request.requestState === 0 ? (
+                <MdOutlinePending />
+              ) : request.requestState === 1 ? (
+                <TiTick />
+              ) : (
+                <RxCrossCircled />
+              )}
+              {request.requestState === 0
+                ? "Zgłoszenie w trakcie rozpatrywania"
+                : request.requestState === 1
+                  ? "Zgłoszenie zaakceptowane"
+                  : "Zgłoszenie odrzucone"}
+            </div>
           </div>
         )}
       </div>

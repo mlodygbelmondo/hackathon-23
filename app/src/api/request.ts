@@ -103,10 +103,11 @@ export interface Request {
   latitude: number;
   longitude: number;
   resultId: number;
+  requestState: number;
 }
 
 export const _getAllRequests = async (): Promise<Request[]> => {
-  const res = await axios.get("http://localhost:5176/api/Request/pending");
+  const res = await axios.get("http://localhost:5176/api/Request/all");
   return res.data ?? [];
 };
 export const _getPendingRequests = async (): Promise<Request[]> => {

@@ -1,16 +1,18 @@
+import { useQuery } from "@tanstack/react-query";
 import type { ReactElement } from "react";
-import { type NextPageWithLayout } from "~/pages/_app";
-import DashboardLayout from "./admin/layout";
+import { _getAllRequests } from "~/api/request";
 import Map from "~/components/Map/Map";
 import RequestsList from "~/components/RequestsList/RequestsList";
-import { _getAllRequests } from "~/api/request";
-import { useQuery } from "@tanstack/react-query";
+import { type NextPageWithLayout } from "~/pages/_app";
+import DashboardLayout from "./admin/layout";
 
 const Page: NextPageWithLayout = () => {
   const { data } = useQuery({
     queryKey: ["requests"],
     queryFn: _getAllRequests,
   });
+
+  console.log(data);
 
   return (
     <div className="flex h-full w-full flex-col gap-2">
