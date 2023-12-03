@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { ReactElement } from "react";
+import { type ReactElement } from "react";
 import { _getPendingRequests } from "~/api/request";
 import Map from "~/components/Map/Map";
 import RequestsList from "~/components/RequestsList/RequestsList";
@@ -10,6 +10,7 @@ const Page: NextPageWithLayout = () => {
   const { data } = useQuery({
     queryKey: ["requests"],
     queryFn: _getPendingRequests,
+    refetchInterval: 1000,
   });
 
   return (

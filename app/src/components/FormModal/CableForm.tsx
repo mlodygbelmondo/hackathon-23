@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getCable } from "~/algorytm";
 import { _pushRequest } from "~/api/request";
 import Input from "~/components/input";
@@ -13,6 +13,7 @@ import type {
   IsolationType,
 } from "~/types";
 import { DEFAULT_MAP_CENTER } from "~/utils/consts";
+import FormMap from "./FormMap";
 
 export interface InitialDataProps {
   typeOfMetal: string;
@@ -239,9 +240,29 @@ const CableForm = () => {
     installationType: InstallationType;
     mountLocalisation: Environment;
   } | null>(null);
-  const [isRequestSent, setIsRequestSent] = useState(false);
 
   const [formStep, setFormStep] = useState(1);
+
+  useEffect(() => {
+    if (
+      formData2.lat === DEFAULT_MAP_CENTER.lat &&
+      formData2.lng === DEFAULT_MAP_CENTER.lng
+    ) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(
+          position,
+          position.coords.latitude,
+          position.coords.longitude,
+        );
+
+        setFormData2({
+          ...formData2,
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    }
+  }, []);
 
   const getFilteredCables = () => {
     let availableCables: CableType[] = cables;
@@ -418,26 +439,33 @@ const CableForm = () => {
     installationType: InstallationType;
     mountLocalisation: Environment;
   }) => {
-    const ok = await _pushRequest({
+    await _pushRequest({
       cableName: res.cableName,
       crossSectionOfVeins: res.crossSectionOfVein,
       installationType: res.installationType,
-      firstName: "Jan",
-      lastName: "Kowalski",
-      latitude: 52.2297,
+      firstName: formData2.firstName,
+      lastName: formData2.lastName,
+      latitude: formData2.lat,
       load: res.load,
-      longitude: 21.0122,
+      longitude: formData2.lng,
       mountLocation: res.mountLocalisation,
       numberOfVeins: res.numberOfVeins,
     });
 
-    if (ok) {
-      setIsRequestSent(true);
-    }
+    setFormData(initialData);
+    setFormData2({
+      lat: DEFAULT_MAP_CENTER.lat,
+      lng: DEFAULT_MAP_CENTER.lng,
+      firstName: "",
+      lastName: "",
+    });
+    setFormStep(1);
+    setRequest(null);
+    setResult([]);
   };
 
   return formStep === 2 ? (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+    <div className="flex w-full flex-col items-center justify-center gap-2">
       <div className="flex gap-4">
         <Input
           placeholderValue="Imię"
@@ -460,6 +488,23 @@ const CableForm = () => {
           label="Wpisz nazwisko"
         />
       </div>
+      <div
+        style={{
+          height: "400px",
+          width: "400px",
+        }}
+        className="overflow-hidden rounded-lg"
+      >
+        <FormMap setFormData2={setFormData2} formData2={formData2} />
+      </div>
+      <form method="dialog">
+        <button
+          onClick={() => request && requestCable(request)}
+          className="text-bold rounded-lg bg-blue-600 p-2 text-white transition-colors hover:bg-blue-700"
+        >
+          Wyślij zgłoszenie
+        </button>
+      </form>
     </div>
   ) : (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2">

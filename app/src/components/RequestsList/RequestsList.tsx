@@ -8,7 +8,7 @@ interface Props {
 
 const RequestsList = ({ requests, isAdmin = false }: Props) => {
   return (
-    <div className="bg-base-200 mr-0 flex h-full w-full flex-col items-center gap-2 rounded-2xl border border-stone-600 px-2 pt-4 shadow-sm shadow-gray-400 lg:mr-2 lg:w-[45%] lg:px-0">
+    <div className="mr-0 flex h-full w-full flex-col items-center gap-2 rounded-2xl border border-stone-600 bg-base-200 px-2 pt-4 shadow-sm shadow-gray-400 lg:mr-2 lg:w-[45%] lg:px-0">
       <p className="w-full px-8 text-left text-2xl font-bold">
         {isAdmin ? "Aktywne zgłoszenia" : "Twoje zgłoszenia"}
       </p>

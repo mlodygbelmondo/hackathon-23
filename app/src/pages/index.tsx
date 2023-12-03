@@ -10,6 +10,7 @@ const Page: NextPageWithLayout = () => {
   const { data } = useQuery({
     queryKey: ["requests"],
     queryFn: _getAllRequests,
+    refetchInterval: 1000,
   });
 
   console.log(data);

@@ -74,7 +74,7 @@ const RequestCard = ({ request, isAdmin }: Props) => {
     <div
       className={twMerge(
         clsx(
-          "card border-neutral bg-neutral text-neutral-content w-full border-2 transition-colors sm:w-[96%]",
+          "card w-full border-2 border-neutral bg-neutral text-neutral-content transition-colors sm:w-[96%]",
           selectedRequest === request.id
             ? "shadow-border-gray-300 border-2 border-gray-300 shadow"
             : "cursor-pointer",
@@ -84,14 +84,8 @@ const RequestCard = ({ request, isAdmin }: Props) => {
     >
       <div className="card-body w-full items-center px-3 py-3 text-center lg:px-8">
         <div className="flex w-full gap-3 lg:gap-4">
-          <div className="border-base-300 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border bg-white shadow shadow-gray-600">
-            <a
-              className="mt-2 text-blue-700"
-              target="_blank"
-              href={result.link}
-            >
-              <Image src={result.linkPhoto} alt="halo" width={64} height={64} />
-            </a>
+          <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-base-300 bg-white shadow shadow-gray-600">
+            <Image src={result.linkPhoto} alt="halo" width={64} height={64} />
           </div>
           <div className="flex w-[calc(100%-64px)] justify-between">
             <div className="flex flex-col justify-between">
@@ -106,7 +100,7 @@ const RequestCard = ({ request, isAdmin }: Props) => {
               <p className="flex items-center gap-1 text-xs font-medium lg:gap-2">
                 <IoPerson /> {request.firstName} {request.lastName}
               </p>
-              <p className="flex items-center gap-1 text-xs font-medium lg:gap-2">
+              <p className="flex items-center gap-1 text-[10px] font-medium lg:gap-2">
                 {/* @ todo/piotr - change it to fetch city based on latitude longitude */}
                 <FaLocationDot /> {data?.results[0].formatted_address}
               </p>

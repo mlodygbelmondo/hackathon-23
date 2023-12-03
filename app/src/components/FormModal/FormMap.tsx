@@ -2,17 +2,32 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import GoogleMap from "google-maps-react-markers";
-import { useAtom } from "jotai";
-import { useEffect, useRef, useState, type RefObject } from "react";
-import { selectedRequestAtom } from "~/atom/common";
+import { useRef, useState, type RefObject } from "react";
 import { env } from "~/env";
-import { DEFAULT_MAP_CENTER, MAP_ZOOM } from "~/utils/consts";
+import { MAP_ZOOM } from "~/utils/consts";
 import { mapOptions } from "~/utils/mapOptions";
-import { type Request } from "../../api/request";
 import Marker from "./FormMarker";
 
-const Map = ({ requests }: { requests: Request[] }) => {
-  const [selectedRequest, setSelectedRequest] = useAtom(selectedRequestAtom);
+const FormMap = ({
+  formData2,
+  setFormData2,
+}: {
+  formData2: {
+    lat: number;
+    lng: number;
+    firstName: string;
+    lastName: string;
+  };
+  setFormData2: React.Dispatch<
+    React.SetStateAction<{
+      lat: number;
+      lng: number;
+      firstName: string;
+      lastName: string;
+    }>
+  >;
+}) => {
+  const { lat, lng } = formData2;
   const mapRef = useRef<google.maps.Map>();
   const [, setMapReady] = useState(false);
 
@@ -23,16 +38,16 @@ const Map = ({ requests }: { requests: Request[] }) => {
     setMapReady(true);
   };
 
-  const onMapClick = (e: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onMapChange = (e: any) => {
     const [lng, lat] = e.center;
 
-    console.log(e)
-
-    const essa = {
+    setFormData2((prev) => ({
+      ...prev,
       lat,
       lng,
-      zoom: e.zoom,
-    };
+    }));
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // const onMapChange = (e: any) => {
@@ -44,23 +59,20 @@ const Map = ({ requests }: { requests: Request[] }) => {
     <div className="h-[100%] w-full">
       <GoogleMap
         apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}
-        defaultZoom={MAP_ZOOM.DEFAULT}
+        defaultZoom={MAP_ZOOM.REQUEST}
         ref={mapRef as unknown as RefObject<HTMLDivElement>}
         options={mapOptions}
-        defaultCenter={DEFAULT_MAP_CENTER}
-        onClick={() => }
+        defaultCenter={{
+          lat,
+          lng,
+        }}
+        onChange={onMapChange}
         onGoogleApiLoaded={onGoogleApiLoaded}
       >
-        {requests.map((request, i) => (
-          <Marker
-            key={i}
-            lat={request.latitude}
-            lng={request.longitude}
-          />
-        ))}
+        <Marker lat={lat} lng={lng} />
       </GoogleMap>
     </div>
   );
 };
 
-export default Map;
+export default FormMap;

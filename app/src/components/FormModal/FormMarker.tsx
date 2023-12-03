@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { FaLocationDot } from "react-icons/fa6";
 
 interface Props {
